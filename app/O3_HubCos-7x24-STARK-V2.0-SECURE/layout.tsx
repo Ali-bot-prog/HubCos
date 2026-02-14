@@ -97,7 +97,7 @@ const menuItems = [
       </aside>
 
        {/* Top Bar (Mobile Only) */}
-       <div className="md:hidden flex items-center justify-between bg-gray-800 p-4 border-b border-gray-700 w-full fixed top-0 z-30">
+       <div className="md:hidden flex items-center justify-between bg-gray-800 p-4 border-b border-gray-700 w-full fixed top-0 left-0 z-30 h-16">
           <div className="flex items-center gap-2">
              <div className="w-8 h-8 bg-[#2D3748] rounded flex items-center justify-center border border-[#C5A059]/30">
                  <span className="text-[#C5A059] font-serif font-bold">H</span>
@@ -114,8 +114,8 @@ const menuItems = [
 
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto bg-gray-900 w-full pt-16 md:pt-0">
-          <div className="p-4 md:p-8 lg:p-12 pb-24">
+      <main className="flex-1 bg-gray-900 w-full md:static relative overflow-x-hidden overflow-y-auto h-full pt-16 md:pt-0">
+          <div className="p-4 md:p-8 lg:p-12 pb-24 min-h-full">
             {children}
           </div>
       </main>
