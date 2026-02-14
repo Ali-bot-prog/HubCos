@@ -1,0 +1,30 @@
+﻿.next/dev/types/validator.ts(25,44): error TS2344: Type 'Route' does not satisfy the constraint 'LayoutRoutes'.
+  Type 'import("C:/Users/alifa/Desktop/Projeler/HubCos.com/.next/dev/types/routes").LayoutRoutes' is not assignable to type 'import("C:/Users/alifa/Desktop/Projeler/HubCos.com/.next/types/routes").LayoutRoutes'.
+    Type '"/yonetim"' is not assignable to type 'LayoutRoutes'.
+.next/dev/types/validator.ts(25,75): error TS2344: Type 'Route' does not satisfy the constraint 'LayoutRoutes'.
+  Type 'import("C:/Users/alifa/Desktop/Projeler/HubCos.com/.next/dev/types/routes").LayoutRoutes' is not assignable to type 'import("C:/Users/alifa/Desktop/Projeler/HubCos.com/.next/types/routes").LayoutRoutes'.
+    Type '"/yonetim"' is not assignable to type 'LayoutRoutes'.
+.next/dev/types/validator.ts(125,39): error TS2307: Cannot find module '../../../app/yonetim/blog/edit/[id]/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(134,39): error TS2307: Cannot find module '../../../app/yonetim/blog/new/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(143,39): error TS2307: Cannot find module '../../../app/yonetim/blog/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(152,39): error TS2307: Cannot find module '../../../app/yonetim/content/contact/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(161,39): error TS2307: Cannot find module '../../../app/yonetim/content/home/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(170,39): error TS2307: Cannot find module '../../../app/yonetim/content/identity/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(179,39): error TS2307: Cannot find module '../../../app/yonetim/content/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(188,39): error TS2307: Cannot find module '../../../app/yonetim/content/services/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(197,39): error TS2307: Cannot find module '../../../app/yonetim/dashboard-settings/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(206,39): error TS2307: Cannot find module '../../../app/yonetim/design/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(215,39): error TS2307: Cannot find module '../../../app/yonetim/faq/edit/[id]/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(224,39): error TS2307: Cannot find module '../../../app/yonetim/faq/new/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(233,39): error TS2307: Cannot find module '../../../app/yonetim/faq/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(242,39): error TS2307: Cannot find module '../../../app/yonetim/footer/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(251,39): error TS2307: Cannot find module '../../../app/yonetim/login/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(260,39): error TS2307: Cannot find module '../../../app/yonetim/menu/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(269,39): error TS2307: Cannot find module '../../../app/yonetim/messages/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(278,39): error TS2307: Cannot find module '../../../app/yonetim/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(287,39): error TS2307: Cannot find module '../../../app/yonetim/projects/edit/[id]/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(296,39): error TS2307: Cannot find module '../../../app/yonetim/projects/new/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(305,39): error TS2307: Cannot find module '../../../app/yonetim/projects/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(314,39): error TS2307: Cannot find module '../../../app/yonetim/settings/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(323,39): error TS2307: Cannot find module '../../../app/yonetim/users/page.js' or its corresponding type declarations.
+.next/dev/types/validator.ts(417,39): error TS2307: Cannot find module '../../../app/yonetim/layout.js' or its corresponding type declarations.

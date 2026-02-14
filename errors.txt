@@ -1,0 +1,42 @@
+﻿
+  ...leware-to-p   
+ r
+  oxy:String) [    
+],
+   RemoteExcep    t
+io
+  n
+      + FullyQualif
+i 
+>    edErrorId : Na
+  
+    tiveCommandErr 
+  
+   or
+   
+    Creating an opt
+imized production b
+uild ...
+  Ô£ô Compiled succ
+essfully in 8.0s
+    Running TypeScr
+ipt ...
+  Failed to compile
+.
+  
+  .next/dev/types/v
+al
+  idator.ts:25:44
+> Type error: Type 
+'R
+  oute' does not sa
+ti
+  sfy the constrain
+t 
+  'LayoutRoutes'.
+    Type 'import("C
+:/
+  Users/alifa/Deskt
+op
+
+
