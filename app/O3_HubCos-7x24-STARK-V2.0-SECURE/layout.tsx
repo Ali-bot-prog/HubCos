@@ -33,11 +33,11 @@ const menuItems = [
   ];
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white overflow-hidden flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row min-h-screen md:h-screen bg-gray-900 text-white md:overflow-hidden">
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div 
-            className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-black/50 z-50 md:hidden backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -45,7 +45,7 @@ const menuItems = [
       {/* Sidebar - Mobile Drawer / Desktop Static */}
       <aside 
         className={`
-            fixed md:static inset-y-0 left-0 z-50 w-64 bg-gray-800 border-r border-gray-700 flex flex-col transition-transform duration-300 ease-in-out h-full
+            fixed md:static inset-y-0 left-0 z-[60] w-64 bg-gray-800 border-r border-gray-700 flex flex-col transition-transform duration-300 ease-in-out h-full
             ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}
       >
@@ -96,8 +96,8 @@ const menuItems = [
         </div>
       </aside>
 
-      {/* Top Bar (Mobile Only) - Natural Flow */}
-      <div className="md:hidden flex items-center justify-between bg-gray-800 p-4 border-b border-gray-700 w-full shrink-0">
+       {/* Top Bar (Mobile Only) */}
+      <div className="md:hidden flex items-center justify-between bg-gray-800 p-4 border-b border-gray-700 w-full shrink-0 sticky top-0 z-40">
           <div className="flex items-center gap-2">
              <div className="w-8 h-8 bg-[#2D3748] rounded flex items-center justify-center border border-[#C5A059]/30">
                  <span className="text-[#C5A059] font-serif font-bold">H</span>
@@ -114,8 +114,8 @@ const menuItems = [
 
 
       {/* Main Content */}
-      <main className="flex-1 bg-gray-900 w-full overflow-x-hidden overflow-y-auto h-full">
-          <div className="p-4 md:p-8 lg:p-12 pb-24 min-h-full">
+      <main className="flex-1 bg-gray-900 w-full md:overflow-x-hidden md:overflow-y-auto h-auto md:h-full">
+        <div className="p-4 md:p-8 lg:p-12 pb-24">
             {children}
           </div>
       </main>
