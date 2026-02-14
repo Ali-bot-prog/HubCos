@@ -1,0 +1,123 @@
+{
+  "siteTitle": "HubCos",
+  "footerText": "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
+  "address": "Kuzey Yıldızı Mahallesi, Bakır Sokak, No:1, Canik/SAMSUN",
+  "phone": "+90 536 674 62 99",
+  "email": "info@hubcos.com",
+  "linkedin": "https://linkedin.com/company/hubcos",
+  "instagram": "https://instagram.com/hubcos",
+  "heroTitle": "ENDÜSTRİYEL SOĞUTMA KULELERİ",
+  "heroSubtitle": "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
+  "aboutTitle": "MÜHENDİSLİK VE PERFORMANS",
+  "aboutText": "HubCos, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder. Doğal çekişli hiperbolik kulelerden, paket tip mekanik kulelere kadar endüstriyel soğutma ihtiyaçlarınız için mühendislik harikası yapılar üretiyoruz.",
+  "primaryColor": "#c59a49",
+  "secondaryColor": "#565425",
+  "layoutMode": "default",
+  "borderRadius": "md",
+  "customCss": "",
+  "heroBackgroundType": "color",
+  "heroOverlayOpacity": 0.5,
+  "heroHeight": "min-h-screen",
+  "dashboardConfig": {
+    "dashboardTitle": "Hoş Geldiniz, Hüseyin Bey. Buradan şirketinizin genel durumu hakkında göz gezdirebilirsiniz.",
+    "showProjectsStat": true,
+    "showMessagesStat": true,
+    "showUsersStat": true,
+    "showGrowthStat": true,
+    "showRecentMessages": true,
+    "showQuickActions": true
+  },
+  "navLinks": [
+    {
+      "id": "1",
+      "title": "Anasayfa",
+      "url": "/"
+    },
+    {
+      "id": "2",
+      "title": "Hakkımızda",
+      "url": "/hakkimizda"
+    },
+    {
+      "id": "3",
+      "title": "Projeler",
+      "url": "/projeler"
+    },
+    {
+      "id": "4",
+      "title": "İletişim",
+      "url": "/iletisim"
+    },
+    {
+      "id": "5",
+      "title": "Diğer",
+      "url": "#",
+      "children": [
+        {
+          "id": "5-1",
+          "title": "Hizmetler",
+          "url": "/hizmetler"
+        },
+        {
+          "id": "5-2",
+          "title": "Blog",
+          "url": "/blog"
+        },
+        {
+          "id": "5-3",
+          "title": "S.S.S",
+          "url": "/sss"
+        }
+      ]
+    }
+  ],
+  "footerLinks": [
+    {
+      "id": "1",
+      "title": "Anasayfa",
+      "url": "/"
+    },
+    {
+      "id": "2",
+      "title": "Hakkımızda",
+      "url": "/hakkimizda"
+    },
+    {
+      "id": "3",
+      "title": "Projeler",
+      "url": "/projeler"
+    },
+    {
+      "id": "4",
+      "title": "Hizmetler",
+      "url": "/hizmetler"
+    },
+    {
+      "id": "5",
+      "title": "İletişim",
+      "url": "/iletisim"
+    }
+  ],
+  "footerServices": [
+    {
+      "id": "1",
+      "title": "Doğal Çekişli Kuleler",
+      "url": "/hizmetler"
+    },
+    {
+      "id": "2",
+      "title": "Mekanik Çekişli Kuleler",
+      "url": "/hizmetler"
+    },
+    {
+      "id": "3",
+      "title": "Yapısal Güçlendirme",
+      "url": "/hizmetler"
+    },
+    {
+      "id": "4",
+      "title": "Endüstriyel Çözümler",
+      "url": "/hizmetler"
+    }
+  ]
+}
