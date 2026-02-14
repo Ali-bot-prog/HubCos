@@ -99,41 +99,75 @@ export default function Header({ config }: { config?: any }) {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-neutral-900 border-t border-gray-800">
-          <div className="flex flex-col p-4 gap-4 text-gray-300">
-             {navLinks.map((link: any) => (
-                <div key={link.id}>
-                    {link.children ? (
-                        <div className="space-y-2">
-                            <div className="font-semibold text-white">{link.title}</div>
-                            <div className="pl-4 space-y-2 border-l border-gray-800 ml-1">
-                                {link.children.map((child: any) => (
-                                    <Link 
-                                        key={child.id} 
-                                        href={child.url} 
-                                        className="block hover:text-secondary" 
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        {child.title}
-                                    </Link>
-                                ))}
-                            </div>
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed inset-0 bg-black/90 z-40 transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        onClick={() => setIsOpen(false)}
+      />
+
+      {/* Mobile Menu Drawer */}
+      <div 
+        className={`fixed top-0 right-0 h-full w-[80%] max-w-sm bg-neutral-900 border-l border-gray-800 z-50 transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+          <div className="flex flex-col h-full">
+            <div className="flex justify-end p-4 border-b border-gray-800">
+                <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-2">
+                    <X className="w-6 h-6" />
+                </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto py-4 px-6">
+                <nav className="flex flex-col gap-6 text-lg font-medium text-gray-300">
+                    {navLinks.map((link: any) => (
+                        <div key={link.id}>
+                            {link.children ? (
+                                <div className="space-y-3">
+                                    <div className="font-semibold text-primary uppercase text-sm tracking-wider opacity-70 mb-2">{link.title}</div>
+                                    <div className="pl-4 space-y-3 border-l-2 border-gray-800 ml-1">
+                                        {link.children.map((child: any) => (
+                                            <Link 
+                                                key={child.id} 
+                                                href={child.url} 
+                                                className="block py-1 hover:text-secondary transition-colors" 
+                                                onClick={() => setIsOpen(false)}
+                                            >
+                                                {child.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <Link 
+                                    href={link.url} 
+                                    className="block hover:text-secondary transition-colors" 
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.title}
+                                </Link>
+                            )}
                         </div>
-                    ) : (
-                        <Link 
-                            href={link.url} 
-                            className="block hover:text-secondary" 
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {link.title}
-                        </Link>
-                    )}
+                    ))}
+                </nav>
+            </div>
+
+            <div className="p-6 border-t border-gray-800 bg-black/20">
+                <div className="flex flex-col gap-4 text-sm text-gray-400">
+                    <a href={`tel:${phone}`} className="flex items-center gap-3 hover:text-white transition-colors">
+                        <Phone className="w-4 h-4 text-secondary" />
+                        <span>{phone}</span>
+                    </a>
+                    <a href={`mailto:${email}`} className="flex items-center gap-3 hover:text-white transition-colors">
+                        <Mail className="w-4 h-4 text-secondary" />
+                        <span>{email}</span>
+                    </a>
+                    <div className="flex gap-4 mt-4 pt-4 border-t border-gray-800/50">
+                        {config?.instagram && <a href={config.instagram} target="_blank" className="hover:text-secondary text-xs uppercase tracking-widest font-bold">INSTAGRAM</a>}
+                        {config?.linkedin && <a href={config.linkedin} target="_blank" className="hover:text-secondary text-xs uppercase tracking-widest font-bold">LINKEDIN</a>}
+                    </div>
                 </div>
-            ))}
+            </div>
           </div>
-        </div>
-      )}
+      </div>
     </header>
   );
 }
