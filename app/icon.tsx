@@ -1,15 +1,15 @@
 import { ImageResponse } from 'next/og';
- 
+
 // Route segment config
 export const runtime = 'edge';
- 
+
 // Image metadata
 export const size = {
-  width: 512,
-  height: 512,
+  width: 32,
+  height: 32,
 };
 export const contentType = 'image/png';
- 
+
 // Image generation
 export default function Icon() {
   return new ImageResponse(
@@ -17,20 +17,31 @@ export default function Icon() {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 320,
-          background: '#1a1a1a',
+          fontSize: 24,
+          background: '#c59a49',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#C5A065',
-          fontFamily: 'serif',
-          fontWeight: 'bold',
-          borderRadius: '20%', // Rounded square for app icon feel
+          color: 'white',
+          borderRadius: '20%',
         }}
       >
-        H
+        {/* Simplified Factory/Tower Icon */}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 20c0-6 2-10 6-10s6 4 6 10" />
+          <path d="M12 5v5" />
+        </svg>
       </div>
     ),
     // ImageResponse options
