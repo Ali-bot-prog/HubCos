@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getUsers } from "@/lib/users";
 import bcrypt from "bcryptjs";
+import { headers } from "next/headers";
+import { logLoginAttempt } from "@/lib/logger";
 
 // For now, hardcoded credentials until DB is fully stable.
 // Access: admin / 123456
@@ -14,7 +16,14 @@ const handler = NextAuth({
         password: { label: "Şifre", type: "password" }
       },
       async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) return null;
+        const headersList = await headers();
+        const ip = headersList.get("x-forwarded-for") || "unknown";
+        const userAgent = headersList.get("user-agent") || "unknown";
+
+        if (!credentials?.username || !credentials?.password) {
+            logLoginAttempt("unknown", false, ip, userAgent);
+            return null;
+        }
 
         const users = getUsers();
         
@@ -23,8 +32,10 @@ const handler = NextAuth({
         if (user) {
             const isValid = await bcrypt.compare(credentials.password, user.passwordHash);
             if (isValid) {
+                logLoginAttempt(credentials.username, true, ip, userAgent);
                 return { id: user.id, name: user.name, email: `${user.username}@hubcos.com` };
             }
+            logLoginAttempt(credentials.username, false, ip, userAgent);
             return null;
         }
 
@@ -38,12 +49,14 @@ const handler = NextAuth({
           return { id: "0", name: "System Admin", email: "admin@hubcos.com" };
         }
 
+        logLoginAttempt(credentials.username, false, ip, userAgent);
+
         return null;
       }
     })
   ],
   pages: {
-    signIn: "/yonetim/login",
+    signIn: "/O3_HubCos-7x24-STARK-V2.0-SECURE/login",
   },
   callbacks: {
     async session({ session, token }) {
