@@ -14,10 +14,10 @@ export default withAuth(
       }
 
       // If whitelist is defined AND current IP is NOT in list -> Block
-      // if (allowedIps.length > 0 && !allowedIps.includes(ip)) {
-      //    // Redirect to home page
-      //    return NextResponse.redirect(new URL("/", req.url));
-      // }
+      if (allowedIps.length > 0 && !allowedIps.includes(ip)) {
+        // Redirect to home page
+        return NextResponse.redirect(new URL("/", req.url));
+      }
 
       // 2. Auth Check
       // Only check auth if we are NOT already on the login page
