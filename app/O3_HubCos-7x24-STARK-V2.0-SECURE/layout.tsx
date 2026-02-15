@@ -96,21 +96,13 @@ export default function AdminLayout({
         </div>
       </aside>
 
-       {/* Top Bar (Mobile Only) */}
-      <div className="md:hidden flex items-center justify-between bg-gray-800 p-4 border-b border-gray-700 w-full shrink-0 sticky top-0 z-40">
-          <div className="flex items-center gap-2">
-             <div className="w-8 h-8 bg-[#2D3748] rounded flex items-center justify-center border border-[#C5A059]/30">
-                 <span className="text-[#C5A059] font-serif font-bold">H</span>
-             </div>
-             <span className="font-bold text-white">HubCos Admin</span>
-          </div>
-          <button 
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="text-gray-300 hover:text-white p-1 rounded-md hover:bg-gray-700"
-          >
-             <Menu size={24} />
-          </button>
-       </div>
+      {/* Mobile Menu Button (Floating) */}
+      <button
+        onClick={() => setIsMobileMenuOpen(true)}
+        className="md:hidden fixed top-4 right-4 z-50 bg-gray-800 text-[#C5A059] p-2 rounded-lg shadow-lg border border-[#C5A059]/30"
+      >
+        <Menu size={24} />
+      </button>
 
       {/* Main Content */}
       <main className="flex-1 bg-gray-900 w-full md:overflow-x-hidden md:overflow-y-auto h-auto md:h-full">
