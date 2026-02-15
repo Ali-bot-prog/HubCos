@@ -5,18 +5,21 @@ export default withAuth(
   function middleware(req) {
     if (req.nextUrl.pathname.startsWith("/O3_HubCos-7x24-STARK-V2.0-SECURE")) {
       // 1. IP Whitelist Check
-      const allowedIps = (process.env.ALLOWED_IPS || "").split(",").filter(Boolean);
+      const allowedIps = (process.env.ALLOWED_IPS || "")
+        .split(",")
+        .map(ip => ip.trim()) // Handle spaces in env var
+        .filter(Boolean);
       
       // Get IP from headers (x-forwarded-for is standard for Vercel/Proxies)
       let ip = req.headers.get("x-forwarded-for") || "unknown";
       if (ip.includes(",")) {
-        ip = ip.split(",")[0];
+        ip = ip.split(",")[0].trim();
       }
 
       // If whitelist is defined AND current IP is NOT in list -> Block
       if (allowedIps.length > 0 && !allowedIps.includes(ip)) {
-        // Redirect to home page with debug info
-        return NextResponse.redirect(new URL(`/?blocked_ip=${ip}`, req.url));
+        // Redirect to home page
+        return NextResponse.redirect(new URL("/", req.url));
       }
 
       // 2. Auth Check
