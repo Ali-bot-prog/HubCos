@@ -80,17 +80,17 @@ export interface ServiceItem {
 export function getSiteConfig(): SiteConfig {
   if (!fs.existsSync(configPath)) {
     return {
-      siteTitle: "HubCos",
+      siteTitle: "HUBYAPI",
       footerText: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
       address: "İstanbul, Türkiye",
       phone: "+90 555 123 45 67",
-      email: "info@hubcos.com",
+      email: "info@hubyapi.com",
       linkedin: "#",
       instagram: "#",
       heroTitle: "ENDÜSTRİYEL SOĞUTMA KULELERİ",
       heroSubtitle: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
       aboutTitle: "MÜHENDİSLİK VE PERFORMANS",
-      aboutText: "HubCos, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder. Doğal çekişli hiperbolik kulelerden, paket tip mekanik kulelere kadar endüstriyel soğutma ihtiyaçlarınız için mühendislik harikası yapılar üretiyoruz.",
+      aboutText: "HUBYAPI, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder. Doğal çekişli hiperbolik kulelerden, paket tip mekanik kulelere kadar endüstriyel soğutma ihtiyaçlarınız için mühendislik harikası yapılar üretiyoruz.",
       primaryColor: "#C5A059", // Gold/Construction Yellow
       secondaryColor: "#1a1a1a", // Anthracite
       layoutMode: "default",
@@ -135,17 +135,17 @@ export function getSiteConfig(): SiteConfig {
   } catch (error) {
     console.error("Error parsing site config:", error);
     return {
-        siteTitle: "HubCos",
+      siteTitle: "HUBYAPI",
         footerText: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
         address: "İstanbul, Türkiye",
         phone: "+90 555 123 45 67",
-        email: "info@hubcos.com",
+      email: "info@hubyapi.com",
         linkedin: "#",
         instagram: "#",
         heroTitle: "ENDÜSTRİYEL SOĞUTMA KULELERİ",
         heroSubtitle: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
         aboutTitle: "MÜHENDİSLİK VE PERFORMANS",
-        aboutText: "HubCos, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder.",
+      aboutText: "HUBYAPI, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder.",
         primaryColor: "#C5A059", 
         secondaryColor: "#1a1a1a",
         layoutMode: "default",

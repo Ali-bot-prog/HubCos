@@ -1,6 +1,6 @@
 import { Factory } from 'lucide-react';
 
-export default function Logo({ className = "", showText = true, title = "HubCos" }: { className?: string, showText?: boolean, title?: string }) {
+export default function Logo({ className = "", showText = true, title = "HUBYAPI" }: { className?: string, showText?: boolean, title?: string }) {
   // Simple logic to split title for styling if it's "HubCos" or just show it
   // If user changes it to "MySite", we want to show "MySite"
   

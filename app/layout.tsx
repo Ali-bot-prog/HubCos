@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HubCos - Endüstriyel Soğutma Kuleleri",
+  title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
   description: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
   manifest: "/manifest.json",
 };

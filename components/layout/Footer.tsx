@@ -90,7 +90,7 @@ export default function Footer({ config }: FooterProps) {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} {config?.siteTitle || "HubCos"}. Tüm hakları saklıdır.</p>
+          <p>&copy; {new Date().getFullYear()} {config?.siteTitle || "HUBYAPI"}. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
