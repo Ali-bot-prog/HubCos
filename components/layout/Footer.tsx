@@ -91,7 +91,7 @@ export default function Footer({ config }: FooterProps) {
               </li>
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-secondary shrink-0" />
-                <span>{config?.email || "info@hubcos.com"}</span>
+                <span>{config?.email || "info@hubyapı.com"}</span>
               </li>
             </ul>
           </div>
