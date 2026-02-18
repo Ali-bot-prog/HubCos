@@ -41,7 +41,7 @@ export default function LoginPage() {
             <div className="w-20 h-20 bg-[#2D3748] rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg border border-[#C5A059]/20">
                 <span className="text-[#C5A059] text-4xl font-serif font-bold">H</span>
             </div>
-          <h1 className="text-2xl font-bold text-white mb-2">HubCos Panel</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">HUBYAPI Panel</h1>
           <p className="text-gray-400 text-sm">Yönetici girişi yapın</p>
         </div>
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full bg-[#374151] border border-gray-600 text-white rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-[#C5A059]/50 focus:border-[#C5A059] transition-all placeholder-gray-500"
-                placeholder="Örn: admin"
+                placeholder="Örn: HUBYAPI"
               />
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function LoginPage() {
         </form>
         
          <div className="mt-6 text-center text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} HubCos.com
+          &copy; {new Date().getFullYear()} HUBYAPI
         </div>
       </div>
     </div>

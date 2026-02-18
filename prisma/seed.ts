@@ -4,12 +4,9 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const username = 'HubCos';
-  // Hash for the password (using the one from users.json for consistency if possible, or a known default)
-  // The hash in users.json is: $2b$10$FQetI6OD499PYQTZae6OO.oFz/u.pX.FYqEudZ4kpHuD5tFyxd1zC
-  // This corresponds to a password (unknown to me right now without brute force, but likely the user knows it).
-  // Safest bet: Insert the hash directly so their old password works.
-  const passwordHash = '$2b$10$FQetI6OD499PYQTZae6OO.oFz/u.pX.FYqEudZ4kpHuD5tFyxd1zC';
+  const username = 'HUBYAPI';
+  // Hash for 123456
+  const passwordHash = '$2b$10$0iqpP8vFJiRjfZeQ76RZOe7zOYN2EVGLu/nniqZetTNk7kKH2hZI2';
 
   const existing = await prisma.admin.findUnique({
     where: { username },

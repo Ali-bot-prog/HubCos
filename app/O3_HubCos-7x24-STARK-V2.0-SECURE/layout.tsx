@@ -65,7 +65,7 @@ export default function AdminLayout({
                 <div className="w-10 h-10 bg-[#2D3748] rounded-lg flex items-center justify-center mr-3 border border-[#C5A059]/30">
                     <span className="text-[#C5A059] text-xl font-serif font-bold">H</span>
                 </div>
-                <h1 className="text-xl font-bold tracking-wide">HubCos Panel</h1>
+            <h1 className="text-xl font-bold tracking-wide">HUBYAPI Panel</h1>
            </div>
            {/* Close button for mobile */}
            <button 
