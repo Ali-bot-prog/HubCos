@@ -16,38 +16,44 @@ const handler = NextAuth({
         password: { label: "Şifre", type: "password" }
       },
       async authorize(credentials) {
+        console.log("[NextAuth] Authorize called with:", credentials?.username);
         const headersList = await headers();
         const ip = headersList.get("x-forwarded-for") || "unknown";
         const userAgent = headersList.get("user-agent") || "unknown";
 
         if (!credentials?.username || !credentials?.password) {
+          console.log("[NextAuth] Missing credentials");
             logLoginAttempt("unknown", false, ip, userAgent);
             return null;
         }
 
-        const users = getUsers();
-        
-        // 1. Check against DB users
+        // 1. Check against DB users using the helper
+        // We use getUsers which now fetches from DB, but better to filter efficiently if we had many users.
+        // For now, we fetch all and find, or we can add a specific find helper.
+        // Let's use the new finding logic.
+        const users = await getUsers();
         const user = users.find(u => u.username === credentials.username);
+
         if (user) {
             const isValid = await bcrypt.compare(credentials.password, user.passwordHash);
             if (isValid) {
+              console.log("[NextAuth] Password valid for user:", user.username);
                 logLoginAttempt(credentials.username, true, ip, userAgent);
-                return { id: user.id, name: user.name, email: `${user.username}@hubcos.com` };
+              // Return simple object to avoid serialisation issues
+              return {
+                id: user.id,
+                name: user.username, // Use username as name 
+                email: "admin@hubcos.com" // Dummy email as it might be required
+              };
             }
+          console.log("[NextAuth] Invalid password");
             logLoginAttempt(credentials.username, false, ip, userAgent);
             return null;
         }
 
-        // 2. Fallback: Hardcoded admin if NO users exist (or specifically for 'admin' if desired, but better to generic fallback only if empty?)
-        // Let's keep the hardcoded admin active IF the username matches 'admin' AND no user in DB has username 'admin'.
-        // Actually, simplest is: if not found in DB, check hardcoded.
-        if (
-          credentials.username === "admin" &&
-          credentials.password === "123456"
-        ) {
-          return { id: "0", name: "System Admin", email: "admin@hubcos.com" };
-        }
+        // 2. Fallback: Removed strictly. Everything must be in DB.
+        // But for safety during migration, if NO admin exists in DB, maybe we allow fallback?
+        // No, let's rely on the seed.
 
         logLoginAttempt(credentials.username, false, ip, userAgent);
 

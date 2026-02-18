@@ -28,7 +28,9 @@ export default function LoginPage() {
       setError("Hatalı kullanıcı adı veya şifre!");
       setLoading(false);
     } else {
-      router.push("/O3_HubCos-7x24-STARK-V2.0-SECURE");
+      console.log("Login successful, redirecting to dashboard...");
+      // Add timestamp to bypass potential 307/308 redirect cache
+      router.push(`/O3_HubCos-7x24-STARK-V2.0-SECURE?t=${Date.now()}`);
     }
   };
 

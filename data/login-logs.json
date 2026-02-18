@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2026-02-18T13:59:04.382Z",
+    "ip": "::1",
+    "username": "HubCos",
+    "success": true,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2026-02-18T13:57:17.136Z",
+    "ip": "::1",
+    "username": "admin",
+    "success": false,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2026-02-18T13:57:12.337Z",
+    "ip": "::1",
+    "username": "admin",
+    "success": false,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+  },
+  {
+    "timestamp": "2026-02-18T13:57:08.719Z",
+    "ip": "::1",
+    "username": "admin",
+    "success": false,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+  }
+]

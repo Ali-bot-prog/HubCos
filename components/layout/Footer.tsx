@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Facebook, Instagram, Linkedin, Twitter, Phone, Mail, MapPin } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
 import { SiteConfig } from '@/lib/config';
@@ -8,6 +11,11 @@ interface FooterProps {
 }
 
 export default function Footer({ config }: FooterProps) {
+  const pathname = usePathname();
+  const isAdminPage = pathname?.startsWith('/O3_HubCos-7x24-STARK-V2.0-SECURE');
+
+  if (isAdminPage) return null;
+
   return (
     <footer className="bg-neutral-950 text-white pt-16 pb-8 border-t border-gray-800">
       <div className="container mx-auto px-4">

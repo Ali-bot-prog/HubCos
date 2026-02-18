@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Mail, MapPin } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
 
 export default function Header({ config }: { config?: any }) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   // Default values if config is missing
@@ -20,6 +22,9 @@ export default function Header({ config }: { config?: any }) {
     { id: "4", title: "Hizmetler", url: "/hizmetler" },
     { id: "5", title: "İletişim", url: "/iletisim" },
   ];
+
+  const isAdminPage = pathname?.startsWith('/O3_HubCos-7x24-STARK-V2.0-SECURE');
+  if (isAdminPage) return null;
 
   return (
     <header className="w-full bg-neutral-900 shadow-md sticky top-0 z-50 border-b border-gray-800">

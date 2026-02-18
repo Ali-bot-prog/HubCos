@@ -32,6 +32,17 @@ export default function AdminLayout({
     { name: "Yöneticiler", href: "/O3_HubCos-7x24-STARK-V2.0-SECURE/users", icon: Users },
   ];
 
+  // Check if we are on the login page
+  const isLoginPage = pathname?.includes("/login");
+
+  if (isLoginPage) {
+    return (
+      <main className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        {children}
+      </main>
+    );
+  }
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen md:h-screen bg-gray-900 text-white md:overflow-hidden">
       {/* Mobile Menu Overlay */}
