@@ -10,6 +10,13 @@ export async function GET() {
         dbPath: process.env.DATABASE_URL || 'default (file:./dev.db)',
     };
 
+    if (!prisma) {
+        return NextResponse.json({
+            error: 'Prisma client not initialized',
+            diagnostics
+        }, { status: 200 });
+    }
+
     try {
         try {
             await prisma.$connect();

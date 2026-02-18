@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getUsers, addUser, deleteUser } from '@/lib/users';
 
 export async function GET() {
-  const users = getUsers();
+  const users = await getUsers();
   // Return users without sensitive data
   const safeUsers = users.map(u => ({
     id: u.id,
@@ -43,7 +43,7 @@ export async function DELETE(req: Request) {
             return NextResponse.json({ error: 'ID required' }, { status: 400 });
         }
 
-        deleteUser(id);
+      await deleteUser(id);
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: 'Error deleting user' }, { status: 500 });
