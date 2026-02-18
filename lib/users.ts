@@ -65,7 +65,7 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
       if (admin) {
         return {
           id: admin.id,
-          username: admin.username,
+          username: admin.username, 
           passwordHash: admin.password,
           name: admin.username,
           role: 'admin'
@@ -77,7 +77,7 @@ export const getUserByUsername = async (username: string): Promise<User | null> 
   }
 
   const users = getJsonUsers();
-  return users.find(u => u.username === username) || null;
+  return users.find(u => u.username.toLowerCase() === username.toLowerCase()) || null;
 }
 
 export const addUser = async (user: Omit<User, 'id' | 'passwordHash'> & { password: string }) => {

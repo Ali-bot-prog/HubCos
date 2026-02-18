@@ -32,7 +32,8 @@ const handler = NextAuth({
         // For now, we fetch all and find, or we can add a specific find helper.
         // Let's use the new finding logic.
         const users = await getUsers();
-        const user = users.find(u => u.username === credentials.username);
+        // Case-insensitive find
+        const user = users.find(u => u.username.toLowerCase() === credentials.username.toLowerCase());
 
         if (user) {
             const isValid = await bcrypt.compare(credentials.password, user.passwordHash);
