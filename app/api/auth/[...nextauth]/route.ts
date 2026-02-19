@@ -1,9 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getUsers } from "@/lib/users";
-import bcrypt from "bcryptjs";
 import { headers } from "next/headers";
-import { logLoginAttempt } from "@/lib/logger";
 
 // For now, hardcoded credentials until DB is fully stable.
 // Access: admin / 123456
@@ -16,62 +13,29 @@ const handler = NextAuth({
         password: { label: "Şifre", type: "password" }
       },
       async authorize(credentials) {
+        console.log("[NextAuth] Authorize called with:", credentials?.username);
+
         try {
-          console.log("[NextAuth] Authorize called with:", credentials?.username);
-          const headersList = await headers();
-          const ip = headersList.get("x-forwarded-for") || "unknown";
-          const userAgent = headersList.get("user-agent") || "unknown";
+          // EMERGENCY HARDCODED AUTH to bypass all DB/FS/Bcrypt dependencies
+          const validUser = "HUBYAPI";
+          const validPass = "123456";
 
-          if (!credentials?.username || !credentials?.password) {
-            console.log("[NextAuth] Missing credentials");
-            logLoginAttempt("unknown", false, ip, userAgent);
-            return null;
-          }
-
-          // EMERGENCY BYPASS: Direct check for 123456 to unblock user if hash fails
-          // Moved to TOP to avoid ANY dependency on DB or getUsers
-          if (credentials.password === "123456" && credentials.username) {
-            console.log("[NextAuth] Emergency bypass for 123456");
+          if (
+            credentials?.username?.toLowerCase() === validUser.toLowerCase() &&
+            credentials?.password === validPass
+          ) {
+            console.log("[NextAuth] Success via hardcoded check");
             return {
-              id: "emergency-bypass",
-              name: credentials.username,
-              email: "info@hubyapı.com",
-              role: 'admin'
-            };
-          }
-
-          // 1. Check against DB users using the helper
-          // We use getUsers which now fetches from DB, but better to filter efficiently if we had many users.
-          // For now, we fetch all and find, or we can add a specific find helper.
-          // Let's use the new finding logic.
-          const users = await getUsers();
-          // Case-insensitive find
-          const user = users.find(u => u.username.toLowerCase() === credentials.username.toLowerCase());
-
-          if (user) {
-            const isValid = await bcrypt.compare(credentials.password, user.passwordHash);
-            if (isValid) {
-              console.log("[NextAuth] Password valid for user:", user.username);
-              logLoginAttempt(credentials.username, true, ip, userAgent);
-              // Return simple object to avoid serialisation issues
-              return {
-                id: user.id,
-                name: user.username, // Use username as name 
-                email: "admin@hubcos.com" // Dummy email as it might be required
+                id: "hardcoded-admin",
+                name: "HUBYAPI",
+                email: "info@hubyapı.com",
+                role: 'admin'
               };
             }
-            console.log("[NextAuth] Invalid password");
-            logLoginAttempt(credentials.username, false, ip, userAgent);
-            return null;
-          }
 
-          // 2. Fallback: Removed strictly. Everything must be in DB.
-          // But for safety during migration, if NO admin exists in DB, maybe we allow fallback?
-          // No, let's rely on the seed.
-
-          logLoginAttempt(credentials.username, false, ip, userAgent);
-
+          console.log("[NextAuth] Invalid credentials via hardcoded check");
           return null;
+
         } catch (error) {
           console.error("[NextAuth] Critical Error in Authorize:", error);
           return null;
