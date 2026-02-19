@@ -82,5 +82,6 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/O3_HubCos-7x24-STARK-V2.0-SECURE/:path*"],
+  // matcher: ["/O3_HubCos-7x24-STARK-V2.0-SECURE/:path*"], 
+  matcher: [] // TEMPORARILY DISABLED TO FIX SERVER ERROR
 };
