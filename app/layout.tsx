@@ -26,12 +26,12 @@ export const viewport: Viewport = {
 
 import { getSiteConfig } from "@/lib/config";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const config = getSiteConfig();
+  const config = await getSiteConfig();
 
   // Dynamic Google Fonts
   const fontPrimary = config.fontPrimary || "Inter";

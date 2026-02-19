@@ -2,8 +2,8 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { getSiteConfig } from '@/lib/config';
 import ContactForm from '@/components/ContactForm';
 
-export default function Iletisim() {
-  const config = getSiteConfig();
+export default async function Iletisim() {
+  const config = await getSiteConfig();
 
   return (
     <div className="container mx-auto px-4 py-16">
