@@ -1,3 +1,4 @@
+import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
 
@@ -186,16 +187,38 @@ export function getSiteConfig(): SiteConfig {
   }
 }
 
-export function updateSiteConfig(newConfig: Partial<SiteConfig>) {
-  const currentConfig = getSiteConfig();
+export async function updateSiteConfig(newConfig: Partial<SiteConfig>) {
+  const currentConfig = await getSiteConfig();
   const updatedConfig = { ...currentConfig, ...newConfig };
   
-  // Ensure the directory exists
+  // 1. Try DB
+  if (prisma) {
+    try {
+      await prisma.siteContent.upsert({
+        where: { key: 'site_config' },
+        update: { value: JSON.stringify(updatedConfig) },
+        create: {
+          key: 'site_config',
+          value: JSON.stringify(updatedConfig)
+        }
+      });
+    } catch (error) {
+      console.error("DB config update failed", error);
+      // Don't throw if JSON works, but on Vercel JSON wont work.
+    }
+  }
+
+  // 2. Update JSON (for local dev or fallback read)
   const dir = path.dirname(configPath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 2));
+  try {
+    fs.writeFileSync(configPath, JSON.stringify(updatedConfig, null, 2));
+  } catch (e) {
+    console.error("JSON write failed (expected on Vercel)", e);
+  }
+
   return updatedConfig;
 }
