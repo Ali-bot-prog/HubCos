@@ -1,13 +1,3 @@
-export type Project = {
-  id: string;
-  title: string;
-  category: string;
-  location: string;
-  image: string;
-  status: string;
-  description?: string;
-};
-
 import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
