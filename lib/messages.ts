@@ -1,16 +1,4 @@
-import fs from 'fs';
-import path from 'path';
 
-export type Message = {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  subject: string;
-  message: string;
-  date: string; // ISO string or formatted date
-  read: boolean;
-};
 
 import { prisma } from '@/lib/prisma';
 import fs from 'fs';
