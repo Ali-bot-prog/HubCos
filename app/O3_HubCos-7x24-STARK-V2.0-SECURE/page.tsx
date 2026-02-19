@@ -21,22 +21,39 @@ export default function AdminDashboard() {
   });
 
   useEffect(() => {
-    // Fetch stats
-    Promise.all([
-        fetch('/api/projects').then(res => res.json()),
-        fetch('/api/messages').then(res => res.json()),
-        fetch('/api/admins').then(res => res.json()),
-        fetch('/api/content').then(res => res.json())
-    ]).then(([projects, messages, admins, content]) => {
+    // Helper to fetch safely
+    const fetchSafe = async (url: string, defaultValue: any) => {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Failed to fetch ${url}`);
+        return await res.json();
+      } catch (e) {
+        console.error(e);
+        return defaultValue;
+      }
+    };
+
+    // Fetch stats individually to preventing one failure from breaking all
+    const loadData = async () => {
+      const [projects, messages, admins, content] = await Promise.all([
+        fetchSafe('/api/projects', []),
+        fetchSafe('/api/messages', []),
+        fetchSafe('/api/admins', []),
+        fetchSafe('/api/content', {})
+      ]);
+
         setStats({
             projects: Array.isArray(projects) ? projects.length : 0,
             messages: Array.isArray(messages) ? messages.filter((m: any) => !m.read).length : 0,
             users: Array.isArray(admins) ? admins.length : 0
         });
-        if (content.dashboardConfig) {
+
+      if (content && content.dashboardConfig) {
             setConfig(content.dashboardConfig);
         }
-    });
+    };
+
+    loadData();
   }, []);
 
   return (
