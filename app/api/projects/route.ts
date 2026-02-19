@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getProjects, addProject, updateProject, deleteProject, Project } from '@/lib/projects';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -23,6 +24,8 @@ export async function POST(req: Request) {
       ...body
     };
     await addProject(newProject); // AWAIT ADDED
+    revalidatePath('/'); // Refresh Home
+    revalidatePath('/projeler'); // Refresh Projects page
     return NextResponse.json(newProject);
   } catch (error) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
@@ -33,6 +36,9 @@ export async function PUT(req: Request) {
   try {
     const body = await req.json();
     await updateProject(body); // AWAIT ADDED
+    // body should contain the id
+    revalidatePath('/');
+    revalidatePath('/projeler');
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
@@ -45,6 +51,8 @@ export async function DELETE(req: Request) {
         const id = searchParams.get('id');
         if (id) {
           await deleteProject(id); // AWAIT ADDED
+          revalidatePath('/');
+          revalidatePath('/projeler');
             return NextResponse.json({ success: true });
         }
         return NextResponse.json({ error: 'ID required' }, { status: 400 });
