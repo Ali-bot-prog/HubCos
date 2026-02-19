@@ -28,7 +28,14 @@ const getJsonUsers = (): User[] => {
 // For now, allow writing to JSON if DB is down, to keep usage working.
 const saveJsonUsers = (users: User[]) => {
   const dir = path.dirname(dataPath);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(dir)) {
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+    } catch (e) {
+      // If we can't create dir, we definitely can't write file.
+      throw new Error("Cannot create data directory - Check filesystem permissions");
+    }
+  }
   fs.writeFileSync(dataPath, JSON.stringify(users, null, 2));
 };
 
@@ -99,25 +106,35 @@ export const addUser = async (user: Omit<User, 'id' | 'passwordHash'> & { passwo
         name: newAdmin.username,
         role: 'admin' as const
       };
-    } catch (e) {
-      console.warn("DB write failed, falling back to JSON");
+    } catch (e: any) {
+      // If username exists error from Prisma, rethrow it
+      if (e.message.includes('Username already exists')) throw e;
+      console.warn("DB write failed, attempting fallback to JSON. Error:", e);
     }
   }
 
   // JSON Fallback
-  const users = getJsonUsers();
-  if (users.find(u => u.username === user.username)) throw new Error('Username already exists');
+  // Warning: This will fail on Vercel/Lambda environments (EROFS)
+  try {
+    const users = getJsonUsers();
+    if (users.find(u => u.username === user.username)) throw new Error('Username already exists');
 
-  const newUser: User = {
-    id: Date.now().toString(),
-    username: user.username,
-    passwordHash: hash,
-    name: user.name,
-    role: user.role
-  };
-  users.push(newUser);
-  saveJsonUsers(users);
-  return newUser;
+    const newUser: User = {
+      id: Date.now().toString(),
+      username: user.username,
+      passwordHash: hash,
+      name: user.name,
+      role: user.role
+    };
+    users.push(newUser);
+    saveJsonUsers(users);
+    return newUser;
+  } catch (e: any) {
+    if (e.code === 'EROFS' || e.message.includes('read-only')) {
+      throw new Error('Database connection failed AND file system is read-only. Cannot save user. Please check database connection.');
+    }
+    throw e;
+  }
 };
 
 export const deleteUser = async (id: string) => {
@@ -131,9 +148,18 @@ export const deleteUser = async (id: string) => {
     }
   }
 
-  if (!deletedFromDb) {
+  // Even if DB delete worked, we might want to sync local file? 
+  // Probably not needed if we move fully to DB, but for hybrid keeping it safe.
+  try {
     const users = getJsonUsers();
     const filtered = users.filter(u => u.id !== id);
-    saveJsonUsers(filtered);
+    if (users.length !== filtered.length) {
+        saveJsonUsers(filtered);
+    }
+  } catch (e: any) {
+    // Ignore EROFS on delete if DB delete was successful
+    if (!deletedFromDb && (e.code === 'EROFS' || e.message.includes('read-only'))) {
+      throw new Error('Database delete failed and file system is read-only.');
+    }
   }
 };
