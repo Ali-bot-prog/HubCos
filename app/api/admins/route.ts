@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { getUsers, addUser, deleteUser } from '@/lib/users';
 
 export async function GET() {

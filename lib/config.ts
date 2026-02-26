@@ -78,112 +78,82 @@ export interface ServiceItem {
   description: string;
 }
 
-export function getSiteConfig(): SiteConfig {
-  if (!fs.existsSync(configPath)) {
-    return {
-      siteTitle: "HUBYAPI",
-      footerText: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
-      address: "İstanbul, Türkiye",
-      phone: "+90 555 123 45 67",
-      email: "info@hubyapı.com",
-      linkedin: "#",
-      instagram: "#",
-      heroTitle: "ENDÜSTRİYEL SOĞUTMA KULELERİ",
-      heroSubtitle: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
-      aboutTitle: "MÜHENDİSLİK VE PERFORMANS",
-      aboutText: "HUBYAPI, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder. Doğal çekişli hiperbolik kulelerden, paket tip mekanik kulelere kadar endüstriyel soğutma ihtiyaçlarınız için mühendislik harikası yapılar üretiyoruz.",
-      primaryColor: "#C5A059", // Gold/Construction Yellow
-      secondaryColor: "#1a1a1a", // Anthracite
-      layoutMode: "default",
-      borderRadius: "md",
-      
-      // Defaults for new fields
-      fontPrimary: "Inter",
-      fontSecondary: "Inter",
-      baseFontSize: "16px",
-      headingColor: "#ffffff",
-      bodyColor: "#9ca3af", // gray-400
-      
-      heroBackgroundType: "image",
-      heroBackgroundImage: "https://images.unsplash.com/photo-1565514020125-021b777a7267?q=80&w=2070",
-      heroBackgroundColor: "#111111",
-      heroGradientEnd: "#000000",
-      heroOverlayOpacity: 0.5,
-      heroTitleColor: "#ffffff",
-      heroSubtitleColor: "#e5e7eb", // gray-200
-      heroTitleSize: "text-6xl",
-      heroHeight: "min-h-[700px]",
+export async function getSiteConfig(): Promise<SiteConfig> {
+  const defaultSiteConfig: SiteConfig = {
+    siteTitle: "HUBYAPI",
+    footerText: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
+    address: "İstanbul, Türkiye",
+    phone: "+90 555 123 45 67",
+    email: "info@hubyapı.com",
+    linkedin: "#",
+    instagram: "#",
+    heroTitle: "ENDÜSTRİYEL SOĞUTMA KULELERİ",
+    heroSubtitle: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
+    aboutTitle: "MÜHENDİSLİK VE PERFORMANS",
+    aboutText: "HUBYAPI, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder. Doğal çekişli hiperbolik kulelerden, paket tip mekanik kulelere kadar endüstriyel soğutma ihtiyaçlarınız için mühendislik harikası yapılar üretiyoruz.",
+    primaryColor: "#C5A059", // Gold/Construction Yellow
+    secondaryColor: "#1a1a1a", // Anthracite
+    layoutMode: "default",
+    borderRadius: "md",
 
-      aboutBackgroundColor: "transparent",
-      aboutTextColor: "#9ca3af",
-      aboutImage: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=2070",
+    // Defaults for new fields
+    fontPrimary: "Inter",
+    fontSecondary: "Inter",
+    baseFontSize: "16px",
+    headingColor: "#ffffff",
+    bodyColor: "#9ca3af", // gray-400
 
-      buttonPrimaryColor: "#C5A059",
-      buttonSecondaryColor: "#1a1a1a",
-      cardBackgroundColor: "#171717", // neutral-900
-      cardBorderRadius: "md",
+    heroBackgroundType: "image",
+    heroBackgroundImage: "https://images.unsplash.com/photo-1565514020125-021b777a7267?q=80&w=2070",
+    heroBackgroundColor: "#111111",
+    heroGradientEnd: "#000000",
+    heroOverlayOpacity: 0.5,
+    heroTitleColor: "#ffffff",
+    heroSubtitleColor: "#e5e7eb", // gray-200
+    heroTitleSize: "text-6xl",
+    heroHeight: "min-h-[700px]",
 
-      services: [
-        { id: "1", icon: "Factory", title: "Doğal Çekişli Kuleler", description: "Termik santraller için yüksek kapasiteli, enerji tasarruflu hiperbolik betonarme yapılar." },
-        { id: "2", icon: "Settings", title: "Mekanik Çekişli Kuleler", description: "Hassas sıcaklık kontrolü gerektiren tesisler için fan destekli soğutma sistemleri." },
-        { id: "3", icon: "Wrench", title: "Yapısal Güçlendirme", description: "Korozyon önleme, beton onarımı ve dolgu malzemesi değişimi ile ömür uzatma." }
-      ]
-    };
+    aboutBackgroundColor: "transparent",
+    aboutTextColor: "#9ca3af",
+    aboutImage: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=2070",
+
+    buttonPrimaryColor: "#C5A059",
+    buttonSecondaryColor: "#1a1a1a",
+    cardBackgroundColor: "#171717", // neutral-900
+    cardBorderRadius: "md",
+
+    services: [
+      { id: "1", icon: "Factory", title: "Doğal Çekişli Kuleler", description: "Termik santraller için yüksek kapasiteli, enerji tasarruflu hiperbolik betonarme yapılar." },
+      { id: "2", icon: "Settings", title: "Mekanik Çekişli Kuleler", description: "Hassas sıcaklık kontrolü gerektiren tesisler için fan destekli soğutma sistemleri." },
+      { id: "3", icon: "Wrench", title: "Yapısal Güçlendirme", description: "Korozyon önleme, beton onarımı ve dolgu malzemesi değişimi ile ömür uzatma." }
+    ]
+  };
+
+  // 1. Try DB
+  if (prisma) {
+    try {
+      const dbConfig = await prisma.siteContent.findUnique({
+        where: { key: 'site_config' }
+      });
+      if (dbConfig && dbConfig.value) {
+        return JSON.parse(dbConfig.value) as SiteConfig;
+      }
+    } catch (error) {
+      console.error("DB config read failed", error);
+    }
   }
+
+  // 2. Try File System Fallback
+  if (!fs.existsSync(configPath)) {
+    return defaultSiteConfig;
+  }
+
   const fileContent = fs.readFileSync(configPath, 'utf8');
   try {
-    return JSON.parse(fileContent);
+    return JSON.parse(fileContent) as SiteConfig;
   } catch (error) {
     console.error("Error parsing site config:", error);
-    return {
-      siteTitle: "HUBYAPI",
-        footerText: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
-        address: "İstanbul, Türkiye",
-        phone: "+90 555 123 45 67",
-      email: "info@hubyapı.com",
-        linkedin: "#",
-        instagram: "#",
-        heroTitle: "ENDÜSTRİYEL SOĞUTMA KULELERİ",
-        heroSubtitle: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.",
-        aboutTitle: "MÜHENDİSLİK VE PERFORMANS",
-      aboutText: "HUBYAPI, enerji üretiminin kalbinde yer alan hayati soğutma sistemlerini inşa eder.",
-        primaryColor: "#C5A059", 
-        secondaryColor: "#1a1a1a",
-        layoutMode: "default",
-        borderRadius: "md",
-        
-        // Defaults for new fields
-        fontPrimary: "Inter",
-        fontSecondary: "Inter",
-        baseFontSize: "16px",
-        headingColor: "#ffffff",
-        bodyColor: "#9ca3af", // gray-400
-        
-        heroBackgroundType: "image",
-        heroBackgroundImage: "https://images.unsplash.com/photo-1565514020125-021b777a7267?q=80&w=2070",
-        heroBackgroundColor: "#111111",
-        heroGradientEnd: "#000000",
-        heroOverlayOpacity: 0.5,
-        heroTitleColor: "#ffffff",
-        heroSubtitleColor: "#e5e7eb", // gray-200
-        heroTitleSize: "text-6xl",
-        heroHeight: "min-h-[700px]",
-
-        aboutBackgroundColor: "transparent",
-        aboutTextColor: "#9ca3af",
-        aboutImage: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=2070",
-
-        buttonPrimaryColor: "#C5A059",
-        buttonSecondaryColor: "#1a1a1a",
-        cardBackgroundColor: "#171717", // neutral-900
-        cardBorderRadius: "md",
-
-        services: [
-            { id: "1", icon: "Factory", title: "Doğal Çekişli Kuleler", description: "Termik santraller için yüksek kapasiteli, enerji tasarruflu hiperbolik betonarme yapılar." },
-            { id: "2", icon: "Settings", title: "Mekanik Çekişli Kuleler", description: "Hassas sıcaklık kontrolü gerektiren tesisler için fan destekli soğutma sistemleri." },
-            { id: "3", icon: "Wrench", title: "Yapısal Güçlendirme", description: "Korozyon önleme, beton onarımı ve dolgu malzemesi değişimi ile ömür uzatma." }
-        ]
-    };
+    return defaultSiteConfig;
   }
 }
 

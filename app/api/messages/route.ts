@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { getMessages, addMessage, markAsRead, deleteMessage, Message } from '@/lib/messages';
 
 export async function GET() {

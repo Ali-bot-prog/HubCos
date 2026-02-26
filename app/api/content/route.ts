@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getSiteConfig, updateSiteConfig } from '@/lib/config';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+
+
 export async function GET() {
   const config = await getSiteConfig(); // AWAIT ADDED
   return NextResponse.json(config);

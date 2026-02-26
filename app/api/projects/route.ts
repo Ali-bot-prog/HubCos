@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 import { getProjects, addProject, updateProject, deleteProject, Project } from '@/lib/projects';
 import { revalidatePath } from 'next/cache';
 

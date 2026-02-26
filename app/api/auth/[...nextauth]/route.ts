@@ -19,35 +19,21 @@ const handler = NextAuth({
         console.log("[NextAuth] Authorize called with:", credentials?.username);
 
         try {
-          // EMERGENCY HARDCODED AUTH to bypass all DB/FS/Bcrypt dependencies
-          const validUser = "HUBYAPI";
-          const validPass = "123456";
-
-          if (
-            credentials?.username?.toLowerCase() === validUser.toLowerCase() &&
-            credentials?.password === validPass
-          ) {
-            console.log("[NextAuth] Success via hardcoded check");
-            return {
-                id: "hardcoded-admin",
-                name: "HUBYAPI",
-                email: "info@hubyapı.com",
-                role: 'admin'
-              };
-            }
-
-          // RESTORED DB LOGIC START
           const headersList = await headers();
           const ip = headersList.get("x-forwarded-for") || "unknown";
           const userAgent = headersList.get("user-agent") || "unknown";
 
           // 1. Check against DB users using the helper
           const users = await getUsers();
-          // Case-insensitive find
           const user = users.find(u => u.username.toLowerCase() === credentials?.username?.toLowerCase());
 
           if (user) {
-            const isValid = await bcrypt.compare(credentials?.password || "", user.passwordHash);
+            // Support both UI-added (bcrypt) and Prisma-Studio-added (plaintext) passwords
+            const isBcrypt = user.passwordHash.startsWith("$2a$") || user.passwordHash.startsWith("$2b$");
+            const isValid = isBcrypt
+              ? await bcrypt.compare(credentials?.password || "", user.passwordHash)
+              : credentials?.password === user.passwordHash;
+
             if (isValid) {
               console.log("[NextAuth] Password valid for user:", user.username);
               logLoginAttempt(credentials?.username || "unknown", true, ip, userAgent);
@@ -55,13 +41,29 @@ const handler = NextAuth({
                 id: user.id,
                 name: user.username,
                 email: "info@hubyapı.com",
-                role: 'admin' // Ensure role is passed
+                role: 'admin'
               };
             }
           }
-          // RESTORED DB LOGIC END
 
-          console.log("[NextAuth] Invalid credentials via hardcoded check and DB check");
+          // EMERGENCY HARDCODED AUTH FALLBACK (Only fires if DB user not found or wrong password)
+          const validUser = "HUBYAPI";
+          const validPass = "123456";
+
+          if (
+            credentials?.username?.toLowerCase() === validUser.toLowerCase() &&
+            credentials?.password === validPass
+          ) {
+            console.log("[NextAuth] Success via hardcoded fallback check");
+            return {
+              id: "hardcoded-admin",
+              name: "HUBYAPI",
+              email: "info@hubyapı.com",
+              role: 'admin'
+            };
+          }
+
+          console.log("[NextAuth] Invalid credentials via DB check and fallback check");
           return null;
 
         } catch (error) {

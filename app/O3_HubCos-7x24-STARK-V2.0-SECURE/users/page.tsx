@@ -97,7 +97,8 @@ export default function UsersPage() {
                         Henüz eklenmiş yönetici yok. (Varsayılan 'admin' hesabı kullanılıyor olabilir)
                     </div>
                 ) : (
-                    <table className="w-full text-left">
+                                  <div className="overflow-x-auto pb-4">
+                                      <table className="w-full text-left min-w-[600px]">
                         <thead className="bg-gray-900/50 text-gray-400 text-sm uppercase">
                             <tr>
                                 <th className="p-4">Ad Soyad</th>
@@ -133,7 +134,8 @@ export default function UsersPage() {
                                 </tr>
                             ))}
                         </tbody>
-                    </table>
+                                      </table>
+                                  </div>
                 )}
             </div>
         </div>
