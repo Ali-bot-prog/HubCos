@@ -14,9 +14,37 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
-  description: "Modern mimari ve güvenilir yapı anlayışıyla geleceği inşa ediyoruz.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hubyapi.com"),
+  title: {
+    template: "%s | HUBYAPI",
+    default: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
+  },
+  description: "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz.",
+  keywords: ["endüstriyel soğutma kuleleri", "hiperbolik soğutma kuleleri", "mekanik soğutma kuleleri", "HubCos", "enerji santralleri", "betonarme yapılar", "soğutma sistemleri"],
+  authors: [{ name: "HubCos" }],
+  creator: "HubCos",
+  publisher: "HubCos",
   manifest: "/manifest.json",
+  openGraph: {
+    title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
+    description: "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz.",
+    url: "https://hubyapi.com",
+    siteName: "HUBYAPI",
+    locale: "tr_TR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
+    description: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri.",
+  },
+  alternates: {
+    canonical: "https://hubyapi.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export const viewport: Viewport = {
