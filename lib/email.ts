@@ -50,7 +50,7 @@ export const sendContactEmail = async (data: {
       from: `"HubCos Web" <${SMTP_USER}>`,
       to: CONTACT_EMAIL_TO, // info@hubyapi.com
       replyTo: data.email,
-      subject: `Web İletişim: ${data.subject} - ${data.name}`,
+      subject: `[${data.subject}] ${data.name} kişisinden yeni mesaj`,
       html: htmlContent,
     });
 
