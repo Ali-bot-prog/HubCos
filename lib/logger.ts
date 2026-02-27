@@ -12,21 +12,25 @@ export type LoginLog = {
 const logPath = path.join(process.cwd(), 'data/login-logs.json');
 
 export const logLoginAttempt = (username: string, success: boolean, ip: string, userAgent?: string) => {
-  const logEntry: LoginLog = {
-    timestamp: new Date().toISOString(),
-    ip,
-    username,
-    success,
-    userAgent
-  };
+  try {
+    const logEntry: LoginLog = {
+      timestamp: new Date().toISOString(),
+      ip,
+      username,
+      success,
+      userAgent
+    };
 
-  const logs = getLoginLogs();
-  logs.unshift(logEntry); // Add new log to the beginning
+    const logs = getLoginLogs();
+    logs.unshift(logEntry); // Add new log to the beginning
 
-  // Keep only the last 1000 logs to prevent file from growing too large
-  const trimmedLogs = logs.slice(0, 1000);
+    // Keep only the last 1000 logs to prevent file from growing too large
+    const trimmedLogs = logs.slice(0, 1000);
 
-  saveLoginLogs(trimmedLogs);
+    saveLoginLogs(trimmedLogs);
+  } catch (e) {
+    console.warn("[Logger] Failed to log login attempt:", e);
+  }
 };
 
 export const getLoginLogs = (): LoginLog[] => {

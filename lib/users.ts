@@ -56,7 +56,7 @@ export const getUsers = async (): Promise<User[]> => {
         }));
       }
     } catch (error) {
-      console.warn("DB fetch failed, falling back to JSON");
+      console.warn("DB fetch failed, falling back to JSON. Error:", error);
     }
   }
 

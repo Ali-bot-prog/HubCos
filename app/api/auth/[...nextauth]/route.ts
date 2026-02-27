@@ -19,9 +19,15 @@ const handler = NextAuth({
         console.log("[NextAuth] Authorize called with:", credentials?.username);
 
         try {
-          const headersList = await headers();
-          const ip = headersList.get("x-forwarded-for") || "unknown";
-          const userAgent = headersList.get("user-agent") || "unknown";
+          let ip = "unknown";
+          let userAgent = "unknown";
+          try {
+            const headersList = await headers();
+            ip = headersList.get("x-forwarded-for") || "unknown";
+            userAgent = headersList.get("user-agent") || "unknown";
+          } catch (e) {
+            console.warn("[NextAuth] Unable to read headers:", e);
+          }
 
           // 1. Check against DB users using the helper
           const users = await getUsers();
