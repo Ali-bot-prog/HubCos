@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 import { getMessages, addMessage, markAsRead, deleteMessage, Message } from '@/lib/messages';
+import { sendContactEmail } from '@/lib/email';
 
 export async function GET() {
   const messages = await getMessages(); // AWAIT ADDED
@@ -11,6 +12,10 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const newMsg = await addMessage(body); // AWAIT ADDED
+
+    // E-posta gönderimini asenkron olarak başlat (kullanıcıyı bekletmemek için)
+    sendContactEmail(body).catch(err => console.error("Email API catch:", err));
+
     return NextResponse.json(newMsg);
   } catch (error) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
