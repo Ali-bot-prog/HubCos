@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cmm3vkr6i000114gb7ws7oeb8",
+      "username": "HUBYAPI",
+      "password": "$2b$10$HfqO.vSwRVtMO2aDGEsF8elGuAVOrzF.0Pdf0Cy1vUyaHAgxWIQfy",
+      "createdAt": "2026-02-26T19:47:36.474Z"
+    },
+    {
+      "id": "cmm3vr3oi000214gb47i4fgjo",
+      "username": "LIGNOIR",
+      "password": "$2b$10$T3R6cvB7OZoncfHB9mWAmem8rjC3vKpvBdfCsm5D87GPpxkU7QO.S",
+      "createdAt": "2026-02-26T19:52:32.610Z"
+    }
+  ]
+}
