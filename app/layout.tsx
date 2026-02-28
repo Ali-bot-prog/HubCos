@@ -115,8 +115,7 @@ export default async function RootLayout({
               "telephone": config.phone || "+90 555 123 45 67",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "İstanbul",
-                "addressLocality": "İstanbul",
+                "streetAddress": config.address || "Türkiye",
                 "addressCountry": "TR"
               },
               "description": "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz."
