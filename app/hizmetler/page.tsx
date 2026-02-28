@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/Icon';
 // import { Building2, Ruler, ShieldCheck, Factory, Wrench, Activity } from 'lucide-react'; // Unused now
 
+
 export default function Hizmetler() {
   const [content, setContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);

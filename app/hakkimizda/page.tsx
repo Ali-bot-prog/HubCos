@@ -2,6 +2,7 @@
 
 import { Reveal, FadeIn } from '@/components/ui/Reveal';
 
+
 export default function Hakkimizda() {
   return (
     <div className="container mx-auto px-4 py-16">

@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hubyapi.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.xn--hubyap-u9a.com"),
   title: {
     template: "%s | HUBYAPI",
     default: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
@@ -28,10 +28,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
     description: "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz.",
-    url: "https://hubyapi.com",
+    url: "https://www.xn--hubyap-u9a.com",
     siteName: "HUBYAPI",
     locale: "tr_TR",
     type: "website",
+    images: [
+      {
+        url: 'https://www.xn--hubyap-u9a.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'HUBYAPI Endüstriyel Soğutma Kuleleri',
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -39,7 +47,7 @@ export const metadata: Metadata = {
     description: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri.",
   },
   alternates: {
-    canonical: "https://hubyapi.com",
+    canonical: "https://www.xn--hubyap-u9a.com",
   },
   robots: {
     index: true,
@@ -95,6 +103,26 @@ export default async function RootLayout({
       <head>
         <link rel="stylesheet" href={googleFontsUrl} />
         <style dangerouslySetInnerHTML={{ __html: style }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "HUBYAPI Endüstriyel Soğutma Kuleleri",
+              "image": "https://www.xn--hubyap-u9a.com/icon.png",
+              "url": "https://www.xn--hubyap-u9a.com",
+              "telephone": config.phone || "+90 555 123 45 67",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "İstanbul",
+                "addressLocality": "İstanbul",
+                "addressCountry": "TR"
+              },
+              "description": "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz."
+            })
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} font-sans antialiased flex flex-col min-h-screen overflow-x-hidden`}

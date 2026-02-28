@@ -48,7 +48,7 @@ export const sendContactEmail = async (data: {
 
     const info = await transporter.sendMail({
       from: `"HubCos Web" <${SMTP_USER}>`,
-      to: CONTACT_EMAIL_TO, // info@hubyapi.com
+      to: CONTACT_EMAIL_TO, // info@hubyapı.com
       replyTo: data.email,
       subject: `[${data.subject}] ${data.name} kişisinden yeni mesaj`,
       html: htmlContent,

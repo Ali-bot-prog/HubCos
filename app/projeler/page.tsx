@@ -5,6 +5,7 @@ import NextImage from 'next/image';
 import { FadeIn } from '@/components/ui/Reveal';
 import { Project } from '@/lib/projects';
 
+
 export default function Projeler() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);

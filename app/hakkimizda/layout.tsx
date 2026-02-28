@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hakkımızda',
-  description: 'HubCos hakkında kurumsal bilgiler, vizyonumuz ve misyonumuz.',
+  title: 'Kurumsal | Hakkımızda',
+  description: 'HubCos enerji ve endüstri sektörünün kalbinde yer alan Soğutma Kuleleri alanında ihtisaslaşmış lider mühendislik firmasıdır.',
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
