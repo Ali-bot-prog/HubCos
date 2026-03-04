@@ -3,6 +3,8 @@
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
 
+// Default statistics shown on homepage. In the future these values could be loaded
+// from a config endpoint or JSON file rather than hardcoding them here.
 const stats = [
   {
     value: 50,

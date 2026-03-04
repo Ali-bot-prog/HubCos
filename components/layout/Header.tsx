@@ -6,7 +6,20 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Mail, MapPin } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
 
-export default function Header({ config }: { config?: any }) {
+// Header receives a configuration object that drives contact info and navigation links.
+// Keeping this parameter typed and passed from a single source (e.g. site-config.json) prevents
+// magic values spread throughout the codebase.
+export interface SiteConfig {
+  siteTitle?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  instagram?: string;
+  linkedin?: string;
+  navLinks?: Array<{ id: string; title: string; url: string; children?: any[] }>;
+}
+
+export default function Header({ config }: { config?: SiteConfig }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 

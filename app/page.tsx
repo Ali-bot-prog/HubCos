@@ -9,6 +9,7 @@ import Icon from "@/components/ui/Icon";
 import { Reveal, FadeIn } from "@/components/ui/Reveal";
 import StatsSection from "@/components/home/StatsSection";
 import ParallaxSection from "@/components/ui/ParallaxSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function Home() {
   const [content, setContent] = useState<any>(null);
@@ -193,15 +194,7 @@ export default function Home() {
       {/* Featured Projects Preview (Simplified to use config colors) */}
       <section className="bg-neutral-950 py-16 md:py-32 border-t border-gray-800">
          <div className="container mx-auto px-4">
-             <div className="flex justify-between items-end mb-10 md:mb-20">
-                <div>
-                     <Reveal>
-                        <h2 className="text-xs md:text-sm font-black tracking-[0.2em] uppercase mb-4" style={{ color: config.primaryColor }}>Referanslar</h2>
-                        <h3 className="text-3xl md:text-5xl font-black" style={{ color: config.headingColor }}>DEV PROJELER</h3>
-                     </Reveal>
-                </div>
-                {/* ... Link ... */}
-             </div>
+             <SectionHeader subtitle="Referanslar" title="DEV PROJELER" />
              
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {projects.slice(0, 3).map((project: any, i) => (

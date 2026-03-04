@@ -71,3 +71,18 @@ npm start
 ## 📝 Geliştirme Notları
 - Bu projede Client Component (istemci etkileşimi - animasyonlar) ve Server Component mimarisi iç içe kullanılmaktadır. Sayfaya özel SEO tanımlamaları için ilgili route altında `layout.tsx` dosyaları kullanılmaktadır.
 - Projede herhangi bir NextAuth veya custom session kontrolü yapılıyorsa `middleware.ts` üzerinden route koruması gerçekleştirilmiştir.
+
+---
+
+## 🧱 Bakım & Teknik Borç Azaltma
+
+Aşağıdaki kurallara dikkat edilirse ileride büyük refaktörler yapmak zorlaşmaz:
+
+1. **Veri kaynakları** — kritik içerikler (`projects`, `references`, `settings`, vb.) Prisma şeması üzerinden tanımlanır. Sabit array veya objelerle içerik eklemeyin; bunun yerine `/api/*` üzerinden bir helper yazın.
+2. **Tip Tanımları** — tüm modeller Prisma'dan otomatik üretilir; eklenen yeni alanlar için `@prisma/client` import edin. UI tarafında ayrıca `types/` klasörü kullanabilirsiniz.
+3. **Tekrarlı UI** — benzer sayfa başlıkları, kart listeleri, butonlar gibi parçaları `components/ui/` içinde yeniden kullanılabilir bileşenler olarak ayırın.
+4. **Localization & Metin** — çeviri dizileri yalnızca kısa kelime ve etiketler için kullanın. Proje adı, müşteri yorumları ya da dinamik içerikler DB'den çekilsin.
+5. **Async Davranış** — sayfaları baştan `async` yazmak, ileride fetch/GraphQL geçişini kolaylaştırır. Veriyi component içinde fetch etmektense sayfa üstünde toplayıp alt bileşenlere geçiriniz.
+6. **Yorum & Dokümantasyon** — karmaşık yardımcı fonksiyonlara ve API route’larına JSDoc ekleyin; parameterler ve dönüş tipleri açık olsun.
+
+Bu maddeler küçük yatırımlarla ilerideki bakım maliyetini ciddi şekilde azaltacak.
