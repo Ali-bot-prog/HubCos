@@ -10,16 +10,30 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import type { SiteConfig, ServiceItem } from "@/lib/config";
 import type { Project } from "@/lib/data";
 
+const HOME_T: Record<string, Record<string, string>> = {
+  tr: { cta1: 'Projelerimiz', cta2: 'Teklif Alın', aboutLabel: 'Hakkımızda', ourTech: 'Teknolojimiz', servicesLabel: 'Faaliyet Alanları', servicesHeading: 'ENDÜSTRİYEL ÇÖZÜMLER', projectsLabel: 'Referanslar', projectsHeading: 'DEV PROJELER', noImage: 'Görsel Yok' },
+  en: { cta1: 'Our Projects', cta2: 'Get a Quote', aboutLabel: 'About Us', ourTech: 'Our Technology', servicesLabel: 'Our Fields', servicesHeading: 'INDUSTRIAL SOLUTIONS', projectsLabel: 'References', projectsHeading: 'MAJOR PROJECTS', noImage: 'No Image' },
+  ar: { cta1: 'مشاريعنا', cta2: 'احصل على عرض سعر', aboutLabel: 'من نحن', ourTech: 'تقنيتنا', servicesLabel: 'مجالات عملنا', servicesHeading: 'الحلول الصناعية', projectsLabel: 'المراجع', projectsHeading: 'مشاريع ضخمة', noImage: 'لا توجد صورة' },
+};
+
 interface Props {
   config: SiteConfig;
   projects: Project[];
+  locale?: string;
 }
 
-export default function HomeClient({ config, projects }: Props) {
-  const heroTitle = config.heroTitle || "ENDÜSTRİYEL SOĞUTMA KULELERİ";
+export default function HomeClient({ config, projects, locale = 'tr' }: Props) {
+  const t = HOME_T[locale] || HOME_T.tr;
+  const loc = (path: string) => `/${locale}${path}`;
+
+  const heroTitle = config.heroTitle || (locale === 'ar' ? 'أبراج التبريد الصناعية' : locale === 'en' ? 'INDUSTRIAL COOLING TOWERS' : 'ENDÜSTRİYEL SOĞUTMA KULELERİ');
   const heroSubtitle =
     config.heroSubtitle ||
-    "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.";
+    (locale === 'ar'
+      ? 'حلول تبريد عالية الأداء لمحطات الطاقة والمنشآت الصناعية.'
+      : locale === 'en'
+        ? 'High-performance hyperbolic and mechanical cooling solutions for power plants and industrial facilities.'
+        : 'Enerji santralleri ve endüstriyel tesisler için yüksek performanslı hiperbolik ve mekanik soğutma çözümleri.');
 
   const heroStyle = {
     height:
@@ -96,7 +110,7 @@ export default function HomeClient({ config, projects }: Props) {
           <FadeIn delay={0.5}>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
               <Link
-                href="/projeler"
+                href={loc('/projeler')}
                 className="px-8 py-4 md:px-12 md:py-5 text-base md:text-lg font-bold transition-all transform hover:translate-y-[-2px] tracking-widest uppercase hover:opacity-90 w-full sm:w-auto"
                 style={{
                   backgroundColor: config.buttonPrimaryColor || "#C5A059",
@@ -104,10 +118,10 @@ export default function HomeClient({ config, projects }: Props) {
                   borderRadius: config.borderRadius === "none" ? "0" : "0.5rem",
                 }}
               >
-                Projelerimiz
+                {t.cta1}
               </Link>
               <Link
-                href="/iletisim"
+                href={loc('/iletisim')}
                 className="px-12 py-5 text-lg font-bold transition-all transform hover:translate-y-[-2px] tracking-widest uppercase hover:bg-white hover:text-black border-2"
                 style={{
                   borderColor: "#fff",
@@ -115,7 +129,7 @@ export default function HomeClient({ config, projects }: Props) {
                   borderRadius: config.borderRadius === "none" ? "0" : "0.5rem",
                 }}
               >
-                Teklif Alın
+                {t.cta2}
               </Link>
             </div>
           </FadeIn>
@@ -146,7 +160,7 @@ export default function HomeClient({ config, projects }: Props) {
           <div className="w-full md:w-1/2 order-1 md:order-2">
             <Reveal>
               <h2 className="text-xs md:text-sm font-black tracking-[0.2em] uppercase mb-4" style={{ color: config.primaryColor }}>
-                Hakkımızda
+                {t.aboutLabel}
               </h2>
             </Reveal>
             <Reveal>
@@ -161,11 +175,11 @@ export default function HomeClient({ config, projects }: Props) {
             </Reveal>
             <Reveal delay={0.6}>
               <Link
-                href="/hakkimizda"
+                href={loc('/hakkimizda')}
                 className="font-bold text-lg flex items-center gap-4 group transition-colors uppercase tracking-widest"
                 style={{ color: config.primaryColor }}
               >
-                Teknolojimiz <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                {t.ourTech} <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </Link>
             </Reveal>
           </div>
@@ -182,10 +196,10 @@ export default function HomeClient({ config, projects }: Props) {
             <div className="max-w-2xl">
               <Reveal width="100%">
                 <h2 className="text-xs md:text-sm font-black tracking-[0.2em] uppercase mb-4" style={{ color: config.primaryColor }}>
-                  Faaliyet Alanları
+                  {t.servicesLabel}
                 </h2>
                 <h3 className="text-3xl md:text-5xl font-black leading-tight" style={{ color: config.headingColor }}>
-                  ENDÜSTRİYEL ÇÖZÜMLER
+                  {t.servicesHeading}
                 </h3>
               </Reveal>
             </div>
@@ -214,12 +228,12 @@ export default function HomeClient({ config, projects }: Props) {
       {/* ── Featured Projects ─────────────────────── */}
       <section className="bg-neutral-950 py-16 md:py-32 border-t border-gray-800">
         <div className="container mx-auto px-4">
-          <SectionHeader subtitle="Referanslar" title="DEV PROJELER" />
+          <SectionHeader subtitle={t.projectsLabel} title={t.projectsHeading} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, i) => (
               <FadeIn delay={0.2 * (i + 1)} key={project.id}>
                 <Link
-                  href={`/projeler/${project.id}`}
+                  href={loc(`/projeler/${project.id}`)}
                   className="group cursor-pointer relative overflow-hidden h-[500px] block"
                   style={{ borderRadius: config.borderRadius === "none" ? "0" : "1rem" }}
                 >
@@ -232,7 +246,7 @@ export default function HomeClient({ config, projects }: Props) {
                     />
                   ) : (
                     <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-                      <span className="text-gray-500">Görsel Yok</span>
+                        <span className="text-gray-500">{t.noImage}</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />

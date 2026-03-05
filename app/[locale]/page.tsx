@@ -31,5 +31,5 @@ export default async function LocalePage({ params }: Props) {
     getSiteConfig(),
     Promise.resolve(getProjectsFromJson()),
   ]);
-  return <HomeClient config={config} projects={projects} />;
+  return <HomeClient config={config} projects={projects} locale={locale} />;
 }
