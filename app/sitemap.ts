@@ -1,92 +1,63 @@
 import { MetadataRoute } from 'next'
 import { getPublishedPosts, getProjectsFromJson } from '@/lib/data'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.xn--hubyap-u9a.com'
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://www.xn--hubyap-u9a.com'
+const LOCALES = ['tr', 'en', 'ar'] as const
 
-  // Static pages
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/hakkimizda`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/hizmetler`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/projeler`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/iletisim`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/sss`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
+function makeEntry(
+  path: string,
+  priority: number,
+  freq: MetadataRoute.Sitemap[number]['changeFrequency']
+): MetadataRoute.Sitemap {
+  return LOCALES.map((locale) => ({
+    url: `${BASE_URL}/${locale}${path}`,
+    lastModified: new Date(),
+    changeFrequency: freq,
+    priority: locale === 'tr' ? priority : priority - 0.1,
+  }))
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticEntries: MetadataRoute.Sitemap = [
+    ...makeEntry('', 1, 'weekly'),
+    ...makeEntry('/hakkimizda', 0.8, 'monthly'),
+    ...makeEntry('/hizmetler', 0.9, 'monthly'),
+    ...makeEntry('/hizmetler/yapisal-guclendirme', 0.9, 'monthly'),
+    ...makeEntry('/projeler', 0.9, 'weekly'),
+    ...makeEntry('/iletisim', 0.7, 'monthly'),
+    ...makeEntry('/sss', 0.7, 'monthly'),
+    ...makeEntry('/blog', 0.8, 'weekly'),
   ]
 
-  // Dynamic blog post routes
-  let blogRoutes: MetadataRoute.Sitemap = []
+  let blogEntries: MetadataRoute.Sitemap = []
   try {
     const posts = getPublishedPosts()
-    blogRoutes = posts.map((p) => ({
-      url: `${baseUrl}/blog/${p.slug || p.id}`,
-      lastModified: p.date ? new Date(p.date) : new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    }))
-  } catch {
-    // Fail silently; static routes still served
-  }
+    posts.forEach((p) => {
+      LOCALES.forEach((locale) => {
+        blogEntries.push({
+          url: `${BASE_URL}/${locale}/blog/${p.slug || p.id}`,
+          lastModified: p.date ? new Date(p.date) : new Date(),
+          changeFrequency: 'monthly',
+          priority: locale === 'tr' ? 0.7 : 0.6,
+        })
+      })
+    })
+  } catch { /* fail silently */ }
 
-  // Dynamic project (case study) routes
-  let projectRoutes: MetadataRoute.Sitemap = []
+  let projectEntries: MetadataRoute.Sitemap = []
   try {
     const projects = getProjectsFromJson()
-    projectRoutes = projects.map((p) => ({
-      url: `${baseUrl}/projeler/${p.id}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    }))
-  } catch {
-    // Fail silently
-  }
+    projects.forEach((p) => {
+      LOCALES.forEach((locale) => {
+        projectEntries.push({
+          url: `${BASE_URL}/${locale}/projeler/${p.id}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: locale === 'tr' ? 0.8 : 0.7,
+        })
+      })
+    })
+  } catch { /* fail silently */ }
 
-  // Static sub-service pages
-  const serviceSubPages: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/hizmetler/yapisal-guclendirme`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.9,
-    },
-  ]
-
-  return [...staticRoutes, ...serviceSubPages, ...blogRoutes, ...projectRoutes]
+  return [...staticEntries, ...blogEntries, ...projectEntries]
 }

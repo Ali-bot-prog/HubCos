@@ -16,6 +16,15 @@ const nextConfig: NextConfig = {
         source: "/:adminPath(O3_HubCos-7x24-STARK-V2\\.0-SECURE)/:path*",
         headers: [{ key: "Cache-Control", value: CACHE_NONE }],
       },
+      // Locale routes — CDN caches 1hr
+      {
+        source: "/:locale(tr|en|ar)",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/:locale(tr|en|ar)/:path*",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
       // Public static pages — CDN caches 1hr, stale-while-revalidate 24hr
       {
         source: "/hakkimizda",

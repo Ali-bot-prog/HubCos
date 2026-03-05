@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone, Mail, MapPin } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
+
 
 // Header receives a configuration object that drives contact info and navigation links.
 // Keeping this parameter typed and passed from a single source (e.g. site-config.json) prevents
@@ -105,6 +107,10 @@ export default function Header({ config }: { config?: SiteConfig }) {
                 </div>
             ))}
           </nav>
+          {/* Language Switcher — desktop only */}
+          <div className="hidden md:flex">
+            <LanguageSwitcher />
+          </div>
 
           {/* Mobile Menu Button */}
           <button 

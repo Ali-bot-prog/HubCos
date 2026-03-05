@@ -22,10 +22,19 @@ export const metadata: Metadata = {
   },
   description: "Expert engineering solutions for industrial cooling systems, power plants, and structural strengthening projects. Enhance your plant efficiency with Hubyapı.",
   keywords: [
-    "endüstriyel soğutma kuleleri", "hiperbolik soğutma kuleleri", "mekanik soğutma kuleleri",
-    "Hubyapı", "HubCos", "enerji santralleri", "betonarme yapılar", "soğutma sistemleri",
-    "mechanical draft cooling towers", "structural strengthening", "industrial cooling solutions",
-    "hyperbolic cooling tower", "cooling tower maintenance", "concrete repair", "power plant cooling"
+    // Marka varyantları — tüm yazım şekilleri
+    "Hubyapı", "Hub Yapı", "hub yapı", "HubCos", "hub cos",
+    "Hubyapi", "Hub Yapi", "hub yapi",
+    // Türkçe teknik
+    "endüstriyel soğutma kuleleri", "hiperbolik soğutma kulesi",
+    "mekanik soğutma kulesi", "soğutma kulesi bakım",
+    "soğutma kulesi inşaatı", "yapısal güçlendirme",
+    "enerji santrali soğutma", "betonarme güçlendirme",
+    // İngilizce teknik
+    "mechanical draft cooling towers", "structural strengthening",
+    "industrial cooling solutions", "hyperbolic cooling tower",
+    "cooling tower maintenance", "concrete repair", "power plant cooling",
+    "EPC engineering", "Turkey cooling tower company"
   ],
   authors: [{ name: "Hubyapı" }],
   creator: "Hubyapı",
