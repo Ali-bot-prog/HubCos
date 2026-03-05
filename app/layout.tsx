@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import SplashScreen from "@/components/SplashScreen";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -110,6 +111,20 @@ export default async function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
+        {/* Google Consent Mode v2 – defaults (must run before gtag loads) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                wait_for_update: 500,
+              });
+            `,
+          }}
+        />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9K8B68GKH8"></script>
         <script
@@ -168,6 +183,7 @@ export default async function RootLayout({
            {children}
         </main>
         <Footer config={config} />
+        <CookieConsent />
         <Toaster />
       </body>
     </html>
