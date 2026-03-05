@@ -1,11 +1,16 @@
 [
   {
     "id": "2",
-    "title": "Bati Rafineri Soğutma",
+    "title": "Batı Rafineri Soğutma",
     "category": "MEKANİK",
     "status": "Devam Ediyor",
     "location": "İzmir, Aliağa",
-    "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=2070",
+    "description": "İzmir Aliağa'daki büyük ölçekli petrol rafinerisinde mekanik çekişli soğutma kulesi sistemi kurulumu.",
+    "longDescription": "Batı Rafineri Soğutma projesi, İzmir Aliağa bölgesindeki bir petrol rafinerisi için yüksek kapasiteli mekanik çekişli soğutma kulesi sistemi tasarımı, tedarik ve anahtar teslim montajını kapsamaktadır. Proje kapsamında 6 adet karşı akışlı (counterflow) mekanik kule hücresi kurulmakta olup toplam soğutma kapasitesi 850 MW termal olarak planlanmıştır. Değişken hız sürücülü fan motorları ve gelişmiş otomasyon sistemi ile enerji tüketimi minimize edilmektedir.",
+    "area": "18.500 m²",
+    "duration": "14 Ay",
+    "service": "EPC Anahtar Teslim – Mekanik Çekişli Soğutma"
   },
   {
     "id": "3",
@@ -13,7 +18,12 @@
     "category": "HİBRİT",
     "status": "Tamamlandı",
     "location": "İskenderun",
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070",
+    "description": "İskenderun'daki entegre demir-çelik tesisi için hibrit soğutma kulesi sistemi kurulumu ve yapısal güçlendirme.",
+    "longDescription": "Güney Çelik Fabrikası projesi; 22 yıllık mevcut betonarme soğutma kulelerinin kapsamlı yapısal rehabilitasyonu ve yeni hibrit soğutma modüllerinin entegrasyonunu içermektedir. Proje ilk aşamasında betonarme kule kabuklarının karbon fiber (CFRP) takviyeli güçlendirmesi ve koruyucu kaplama sistemi uygulandı. İkinci aşamada enerji tüketimini optimize etmek amacıyla kapasiteye göre devreye giren mekanik fan modülleri hibrit sistem olarak mevcut yapıya entegre edildi. Rehabilitasyon sonrası tesisin soğutma kapasitesi %35 artış gösterdi.",
+    "area": "11.200 m²",
+    "duration": "10 Ay",
+    "service": "Yapısal Güçlendirme & Hibrit Sistem Entegrasyonu"
   },
   {
     "id": "4",
@@ -21,7 +31,12 @@
     "category": "DOĞAL ÇEKİŞLİ",
     "status": "Tamamlandı",
     "location": "Ankara, Çayırhan",
-    "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070",
+    "description": "Çayırhan termik santralinde 2 adet yüksek kapasiteli hiperbolik betonarme soğutma kulesi inşaatı.",
+    "longDescription": "Anadolu Termik Santrali projesi, Ankara Çayırhan'da faaliyet gösteren büyük ölçekli kömür yakıtlı termik santral için iki adet hiperbolik doğal çekişli betonarme soğutma kulesi inşaatını kapsamaktadır. Her bir kule 130 metre yüksekliğe ve 5.000 MW termal soğutma kapasitesine sahiptir. Özel şekilli qçift eğrilikli hiperbolik kabuk geometrisi hesaplamalı akışkanlar dinamiği (CFD) analizleriyle optimize edilmiştir. Proje, Türkiye'nin en büyük soğutma kulesi inşaatları arasında yer almaktadır.",
+    "area": "Kule Çapı: 120 m / Yükseklik: 130 m",
+    "duration": "28 Ay",
+    "service": "Doğal Çekişli Betonarme Kule İnşaatı (EPC)"
   },
   {
     "id": "5",
@@ -29,6 +44,11 @@
     "category": "MEKANİK",
     "status": "Tamamlandı",
     "location": "Kocaeli, Gebze",
-    "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070"
+    "image": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070",
+    "description": "Kocaeli Gebze'deki büyük kimya tesisi için kompakt mekanik çekişli soğutma kulesi parkı kurulumu.",
+    "longDescription": "Marmara Kimya Tesisleri projesi, Kocaeli Gebze'deki petrokimya parkında yer alan kimya fabrikası için çok hücreli mekanik soğutma kulesi sisteminin tasarım, imalat ve işletmeye alma hizmetlerini kapsamaktadır. Kimya proseslerinin hassas soğutma gereksinimlerine yanıt vermek amacıyla 8 adet bağımsız soğutma hücresi modüler düzende kurulmuştur. Kimya tesislerinin korozif atmosferine karşı tüm bileşenler FRP (fiber takviyeli plastik) ve paslanmaz çelikten imal edilmiştir. Sistem; PLC tabanlı akıllı kontrol ve uzaktan izleme altyapısıyla donatılmıştır.",
+    "area": "6.400 m²",
+    "duration": "9 Ay",
+    "service": "Mekanik Soğutma Kulesi Parkı – Tasarım & Anahtar Teslim"
   }
 ]

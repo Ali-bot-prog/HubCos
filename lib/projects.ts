@@ -10,6 +10,10 @@ export type Project = {
   image: string;
   status: string;
   description?: string;
+  longDescription?: string;
+  area?: string;
+  duration?: string;
+  service?: string;
 };
 
 const dataPath = path.join(process.cwd(), 'data/projects.json');

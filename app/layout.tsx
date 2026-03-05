@@ -16,20 +16,25 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.xn--hubyap-u9a.com"),
   title: {
-    template: "%s | HUBYAPI",
-    default: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
+    template: "%s | Hubyapı",
+    default: "Hubyapı | Industrial Cooling Towers & Structural Strengthening",
   },
-  description: "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz.",
-  keywords: ["endüstriyel soğutma kuleleri", "hiperbolik soğutma kuleleri", "mekanik soğutma kuleleri", "HubCos", "enerji santralleri", "betonarme yapılar", "soğutma sistemleri"],
-  authors: [{ name: "HubCos" }],
-  creator: "HubCos",
-  publisher: "HubCos",
+  description: "Expert engineering solutions for industrial cooling systems, power plants, and structural strengthening projects. Enhance your plant efficiency with Hubyapı.",
+  keywords: [
+    "endüstriyel soğutma kuleleri", "hiperbolik soğutma kuleleri", "mekanik soğutma kuleleri",
+    "Hubyapı", "HubCos", "enerji santralleri", "betonarme yapılar", "soğutma sistemleri",
+    "mechanical draft cooling towers", "structural strengthening", "industrial cooling solutions",
+    "hyperbolic cooling tower", "cooling tower maintenance", "concrete repair", "power plant cooling"
+  ],
+  authors: [{ name: "Hubyapı" }],
+  creator: "Hubyapı",
+  publisher: "Hubyapı",
   manifest: "/manifest.json",
   openGraph: {
-    title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
-    description: "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz.",
+    title: "Hubyapı | Industrial Cooling Towers & Structural Strengthening",
+    description: "Expert engineering solutions for industrial cooling systems, power plants, and structural strengthening projects. Enhance your plant efficiency with Hubyapı.",
     url: "https://www.xn--hubyap-u9a.com",
-    siteName: "HUBYAPI",
+    siteName: "Hubyapı",
     locale: "tr_TR",
     type: "website",
     images: [
@@ -37,17 +42,21 @@ export const metadata: Metadata = {
         url: 'https://www.xn--hubyap-u9a.com/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: 'HUBYAPI Endüstriyel Soğutma Kuleleri',
+        alt: 'Hubyapı Industrial Cooling Towers & Structural Strengthening',
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "HUBYAPI - Endüstriyel Soğutma Kuleleri",
-    description: "Enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri.",
+    title: "Hubyapı | Industrial Cooling Towers & Structural Strengthening",
+    description: "Expert engineering solutions for industrial cooling systems, power plants, and structural strengthening projects.",
   },
   alternates: {
     canonical: "https://www.xn--hubyap-u9a.com",
+    languages: {
+      "tr": "https://www.xn--hubyap-u9a.com",
+      "en": "https://www.xn--hubyap-u9a.com/en",
+    },
   },
   robots: {
     index: true,
@@ -109,16 +118,30 @@ export default async function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "HUBYAPI Endüstriyel Soğutma Kuleleri",
+              "name": "Hubyapı – Industrial Cooling Towers & Structural Strengthening",
+              "alternateName": "HubCos",
               "image": "https://www.xn--hubyap-u9a.com/icon.png",
               "url": "https://www.xn--hubyap-u9a.com",
               "telephone": config.phone || "+90 555 123 45 67",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": config.address || "Türkiye",
+                "addressLocality": "İstanbul",
                 "addressCountry": "TR"
               },
-              "description": "Modern mimari ve güvenilir yapı anlayışıyla enerji santralleri ve endüstriyel tesisler için yüksek performanslı soğutma sistemleri inşa ediyoruz."
+              "areaServed": ["TR", "Middle East", "Central Asia"],
+              "serviceType": [
+                "Mechanical Draft Cooling Towers",
+                "Hyperbolic Cooling Tower Construction",
+                "Structural Strengthening",
+                "Concrete Repair",
+                "Cooling Tower Maintenance",
+                "EPC Engineering Services"
+              ],
+              "description": "Expert engineering solutions for industrial cooling systems, power plants, and structural strengthening projects. 20+ years serving energy and industrial sectors.",
+              "sameAs": [
+                "https://www.xn--hubyap-u9a.com"
+              ]
             })
           }}
         />

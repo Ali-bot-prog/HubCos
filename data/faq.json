@@ -1,1 +1,42 @@
-[]
+[
+    {
+        "id": "1",
+        "question": "Mekanik çekişli soğutma kulesi ile doğal çekişli soğutma kulesi arasındaki fark nedir?",
+        "answer": "Doğal çekişli (hiperbolik) soğutma kuleleri, yüksek baca yapısı sayesinde sıcak havanın yukarı çekilmesi prensibiyle çalışır; büyük termik santraller için idealdir ve yüksek kapasite sunar. Mekanik çekişli kuleler ise fan motorları aracılığıyla hava akışını kontrol eder; daha kompakt yapıları ve hassas sıcaklık kontrolleri sayesinde rafineriler, kimya tesisleri ve orta/büyük ölçekli endüstriyel uygulamalar için tercih edilir."
+    },
+    {
+        "id": "2",
+        "question": "Soğutma kulelerinin bakım sıklığı ne olmalıdır?",
+        "answer": "Mekanik soğutma kulelerinde yılda en az iki kez kapsamlı bakım yapılması önerilir: ilkbahar başında sezon açılış bakımı ve sonbahar sonunda sezon kapanış bakımı. Bu bakımlar; fan kanatları ve motor kontrolü, dolgu malzemesi incelemesi, su dağıtım sistemi temizliği ve biyolojik kontrol testlerini kapsar. Betonarme hiperbolik kulelerde ise yapısal denetim 2–3 yılda bir mutlaka gerçekleştirilmelidir."
+    },
+    {
+        "id": "3",
+        "question": "Yapısal güçlendirme ne zaman gerekli olur?",
+        "answer": "Soğutma kulelerinde bitkisel oluşumlar, çatlak oluşumu, beton dökülmesi, korozyon izleri veya ölçülen performans düşüşü yapısal güçlendirme ihtiyacının işaretleridir. Özellikle 20 yıl üzerindeki betonarme yapılarda karbon fiber takviye, epoksi enjeksiyon ve koruyucu kaplama uygulamaları hem yapısal ömrü uzatır hem de operasyonel güvenliği artırır."
+    },
+    {
+        "id": "4",
+        "question": "Bir mekanik soğutma kulesi projesi ne kadar sürer?",
+        "answer": "Projenin büyüklüğüne göre değişmekle birlikte; tasarım ve onay süreci 4–8 hafta, imalat ve tedarik 6–12 hafta, saha montajı ise 4–10 hafta sürmektedir. Anahtar teslim EPC projelerinde toplam süre genellikle 4 ila 8 ay arasında tamamlanmaktadır. HubCos, proje yönetimi süreçlerini sıkı takvimlere bağlayarak zamanında teslimatı garanti altına alır."
+    },
+    {
+        "id": "5",
+        "question": "HubCos hangi sektörlere hizmet vermektedir?",
+        "answer": "HubCos; termik santraller, nükleer enerji tesisleri, petrol rafinerileri, petrokimya ve kimya fabrikaları, demir-çelik üretim tesisleri, çimento fabrikaları ve HVAC sistemleri gibi geniş bir sektör yelpazesine hizmet vermektedir. Her sektörün kendine özgü süreç koşullarını göz önünde bulundurarak özel mühendislik çözümleri geliştirilmektedir."
+    },
+    {
+        "id": "6",
+        "question": "Soğutma kulelerinde enerji verimliliği nasıl artırılır?",
+        "answer": "Enerji verimliliği birkaç kritik alanda iyileştirilebilir: yüksek verimli dolgu malzemelerinin değiştirilmesi ile termal performansın artırılması, değişken hız sürücülü (VFD) fan motorlarının uygulanması, su dağıtım nozullarının optimizasyonu ve düzenli termal performans testleri ile sapma analizleri yapılması. HubCos mühendisleri, mevcut sistemlerin %15–30 oranında enerji tasarrufu sağlamasına yardımcı olabilmektedir."
+    },
+    {
+        "id": "7",
+        "question": "Betonarme soğutma kulelerinde karbon fiber güçlendirme nedir?",
+        "answer": "Karbon fiber takviyeli polimer (CFRP) sistemleri, betonarme yüzeylere yüksek mukavemetli karbon fiber şerit veya kumaşların epoksi reçinesiyle yapıştırılmasından oluşur. Bu yöntem; yapının kesit alanını büyütmeden eğilme, kesme ve basınç kapasitesini önemli ölçüde artırır, korozyona karşı tam direnç sağlar ve uygulama süresi geleneksel yöntemlere göre çok daha kısadır."
+    },
+    {
+        "id": "8",
+        "question": "HubCos'un kalite ve güvenlik sertifikaları nelerdir?",
+        "answer": "HubCos, ISO 9001 Kalite Yönetim Sistemi ve ISO 45001 İş Sağlığı ve Güvenliği standartlarına uygun olarak faaliyet göstermektedir. Tüm projeler Türk Standartları Enstitüsü (TSE) normlarına ve ilgili Avrupa standartlarına (EN) göre yürütülür. Ayrıca EPC projelerinde bağımsız kalite denetim firmalarıyla iş birliği yapılmakta ve her aşama belgelenarak müşterilere raporlanmaktadır."
+    }
+]
