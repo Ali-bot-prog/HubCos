@@ -1,32 +1,57 @@
 import type { NextConfig } from "next";
 
+const CACHE_PUBLIC = "public, s-maxage=3600, stale-while-revalidate=86400";
+const CACHE_NONE = "no-store, max-age=0";
+
 const nextConfig: NextConfig = {
   headers: async () => {
     return [
+      // API routes — never cache (contact form, dynamic data)
+      {
+        source: "/api/:path*",
+        headers: [{ key: "Cache-Control", value: CACHE_NONE }],
+      },
       // Admin panel — never cache
       {
-        source: "/(O3_HubCos-7x24-STARK-V2\\.0-SECURE|api/admin)(.*)",
-        headers: [
-          { key: "Cache-Control", value: "no-store, max-age=0" },
-        ],
+        source: "/:adminPath(O3_HubCos-7x24-STARK-V2\\.0-SECURE)/:path*",
+        headers: [{ key: "Cache-Control", value: CACHE_NONE }],
       },
-      // Public API routes — no-store (contact form, dynamic content)
+      // Public static pages — CDN caches 1hr, stale-while-revalidate 24hr
       {
-        source: "/api/(.*)",
-        headers: [
-          { key: "Cache-Control", value: "no-store, max-age=0" },
-        ],
+        source: "/hakkimizda",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
       },
-      // Static public pages — CDN caches for 1 hour, serves stale for 24h
       {
-        source:
-          "/(|hakkimizda|hizmetler|hizmetler/(.*)|projeler|projeler/(.*)|iletisim|sss|blog|blog/(.*))",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, s-maxage=3600, stale-while-revalidate=86400",
-          },
-        ],
+        source: "/hizmetler",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/hizmetler/:path*",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/projeler",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/projeler/:id",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/iletisim",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/sss",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/blog",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
+      },
+      {
+        source: "/blog/:slug",
+        headers: [{ key: "Cache-Control", value: CACHE_PUBLIC }],
       },
     ];
   },
@@ -42,4 +67,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
 
