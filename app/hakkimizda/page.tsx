@@ -1,5 +1,3 @@
-"use client";
-
 import { Reveal, FadeIn } from '@/components/ui/Reveal';
 
 

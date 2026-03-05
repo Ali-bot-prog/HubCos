@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next'
-import fs from 'fs'
-import path from 'path'
+import { getPublishedPosts, getProjectsFromJson } from '@/lib/data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.xn--hubyap-u9a.com'
@@ -54,18 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic blog post routes
   let blogRoutes: MetadataRoute.Sitemap = []
   try {
-    const filePath = path.join(process.cwd(), 'data/posts.json')
-    if (fs.existsSync(filePath)) {
-      const posts = JSON.parse(fs.readFileSync(filePath, 'utf8'))
-      blogRoutes = posts
-        .filter((p: any) => p.published)
-        .map((p: any) => ({
-          url: `${baseUrl}/blog/${p.slug || p.id}`,
-          lastModified: p.date ? new Date(p.date) : new Date(),
-          changeFrequency: 'monthly' as const,
-          priority: 0.7,
-        }))
-    }
+    const posts = getPublishedPosts()
+    blogRoutes = posts.map((p) => ({
+      url: `${baseUrl}/blog/${p.slug || p.id}`,
+      lastModified: p.date ? new Date(p.date) : new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
   } catch {
     // Fail silently; static routes still served
   }
@@ -73,16 +67,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic project (case study) routes
   let projectRoutes: MetadataRoute.Sitemap = []
   try {
-    const filePath = path.join(process.cwd(), 'data/projects.json')
-    if (fs.existsSync(filePath)) {
-      const projects = JSON.parse(fs.readFileSync(filePath, 'utf8'))
-      projectRoutes = projects.map((p: any) => ({
-        url: `${baseUrl}/projeler/${p.id}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-      }))
-    }
+    const projects = getProjectsFromJson()
+    projectRoutes = projects.map((p) => ({
+      url: `${baseUrl}/projeler/${p.id}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
   } catch {
     // Fail silently
   }
@@ -99,4 +90,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticRoutes, ...serviceSubPages, ...blogRoutes, ...projectRoutes]
 }
-

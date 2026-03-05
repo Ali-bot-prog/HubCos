@@ -1,16 +1,5 @@
-import fs from "fs";
-import path from "path";
+import { getFaqs } from "@/lib/data";
 import FAQClient from "./FAQClient";
-
-function getFaqs() {
-  const filePath = path.join(process.cwd(), "data/faq.json");
-  if (!fs.existsSync(filePath)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } catch {
-    return [];
-  }
-}
 
 export default function FAQPage() {
   const faqs = getFaqs();

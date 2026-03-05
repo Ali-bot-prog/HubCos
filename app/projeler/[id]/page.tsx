@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -7,24 +5,11 @@ import {
   MapPin, Clock, Layers, Briefcase, ArrowLeft, ArrowRight, CheckCircle2
 } from "lucide-react";
 import type { Metadata } from "next";
-import type { Project } from "@/lib/projects";
-
-function getProjects(): Project[] {
-  const filePath = path.join(process.cwd(), "data/projects.json");
-  if (!fs.existsSync(filePath)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } catch {
-    return [];
-  }
-}
-
-function getProject(id: string): Project | undefined {
-  return getProjects().find((p) => p.id === id);
-}
+import { getProjectById, getProjectsFromJson } from "@/lib/data";
+import type { Project } from "@/lib/data";
 
 export async function generateStaticParams() {
-  return getProjects().map((p) => ({ id: p.id }));
+  return getProjectsFromJson().map((p) => ({ id: p.id }));
 }
 
 export async function generateMetadata({
@@ -33,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const project = getProject(id);
+  const project = getProjectById(id);
   if (!project) return { title: "Proje Bulunamadı" };
   return {
     title: `${project.title} | Case Study – Hubyapı`,
@@ -65,10 +50,10 @@ export default async function ProjectDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const project = getProject(id);
+  const project = getProjectById(id);
   if (!project) notFound();
 
-  const allProjects = getProjects();
+  const allProjects = getProjectsFromJson();
   const others = allProjects.filter((p) => p.id !== project.id).slice(0, 2);
 
   const schema = {

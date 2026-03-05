@@ -1,40 +1,12 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import { Calendar, Tag, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
-
-interface Post {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  image: string;
-  date: string;
-  published: boolean;
-  category: string;
-}
-
-function getPosts(): Post[] {
-  const filePath = path.join(process.cwd(), "data/posts.json");
-  if (!fs.existsSync(filePath)) return [];
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } catch {
-    return [];
-  }
-}
-
-function getPost(slug: string): Post | undefined {
-  const posts = getPosts();
-  return posts.find((p) => p.slug === slug || p.id === slug);
-}
+import { getPost, getPosts } from "@/lib/data";
+import type { Post } from "@/lib/data";
 
 export async function generateStaticParams() {
-  const posts = getPosts();
-  return posts
+  return getPosts()
     .filter((p) => p.published)
     .map((p) => ({ slug: p.slug || p.id }));
 }
