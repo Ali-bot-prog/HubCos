@@ -2,19 +2,9 @@ import { prisma } from '@/lib/prisma';
 import fs from 'fs';
 import path from 'path';
 
-export type Project = {
-  id: string;
-  title: string;
-  category: string;
-  location: string;
-  image: string;
-  status: string;
-  description?: string;
-  longDescription?: string;
-  area?: string;
-  duration?: string;
-  service?: string;
-};
+// Single source of truth for the Project type
+export type { Project } from '@/lib/data';
+import type { Project } from '@/lib/data';
 
 const dataPath = path.join(process.cwd(), 'data/projects.json');
 
