@@ -110,6 +110,18 @@ export default async function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9K8B68GKH8"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-9K8B68GKH8');
+            `,
+          }}
+        />
         <link rel="stylesheet" href={googleFontsUrl} />
         <style dangerouslySetInnerHTML={{ __html: style }} />
         <script
